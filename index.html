@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MovieClub &mdash; Browse millions of movies</title>
+
+    <link rel="stylesheet" href="src/css/styles.css" />
+    <link rel="shortcut icon" href="src/img/favicon.png" type="image/x-icon" />
+
+    <!-- type="module" ?? -->
+    <!-- <script defer src="src/js/controller.js"></script> -->
+  </head>
+
+  <body>
+    <h1 class="sr-only">
+      MovieClub &mdash; Browse millions of movies & TV shows
+    </h1>
+
+    <!-- ---------------------- -->
+    <!--         NAVBAR         -->
+    <!-- ---------------------- -->
+    <!-- Nav background -->
+    <nav class="nav nav__bg">
+      <!-- Nav content -->
+      <div class="flex container padding-top--sm padding-bottom--sm">
+        <!-- Logo -->
+        <img src="src/img/logo.png" alt="Logo" class="nav__logo" />
+        <!-- Search bar -->
+        <form class="nav__search flex">
+          <div class="search__wrapper">
+            <input
+              type="text"
+              class="search__field"
+              placeholder="Search any movie or show..."
+            />
+            <button class="btn search__btn">
+              <span class="hidden">Search</span>
+              <ion-icon name="search-outline" class="icon"></ion-icon>
+            </button>
+          </div>
+        </form>
+        <!-- Bookmarks button -->
+        <div class="btn btn--bookmarks flex center">
+          <span class="hidden">Bookmarks</span>
+          <ion-icon
+            name="bookmark-outline"
+            class="icon icon--bookmarks"
+          ></ion-icon>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ---------------------- -->
+    <!--         SLIDER         -->
+    <!-- ---------------------- -->
+
+    <!-- *********************** -->
+    <!-- *********************** -->
+    <!-- *********************** -->
+    <!-- *********************** -->
+    <div class="slider container hdn">
+      <!-- Para hacer funcionar el slider con JS, debo mover el .slider__wrapper con translateX() -->
+      <div class="slider__wrapper flex">
+        <!-- Slide 1 -->
+        <div class="slider__slide">
+          <img src="src/img/ex/slider-poster-ex.jpg" alt="" />
+        </div>
+        <!-- Slide 2 -->
+        <div class="slider__slide">
+          <img src="src/img/ex/slider-poster-ex.jpg" alt="" />
+        </div>
+        <!-- Slide 3 -->
+        <div class="slider__slide">
+          <img src="src/img/ex/slider-poster-ex.jpg" alt="" />
+        </div>
+      </div>
+
+      <!-- Button previous -->
+      <div class="button__container button__container--previous">
+        <div class="button__box flex center">
+          <ion-icon name="chevron-back-outline" class="button__icon"></ion-icon>
+        </div>
+      </div>
+
+      <!-- Button next -->
+      <div class="button__container button__container--next">
+        <div class="button__box flex center">
+          <ion-icon
+            name="chevron-forward-outline"
+            class="button__icon"
+          ></ion-icon>
+        </div>
+      </div>
+    </div>
+    <!-- HACER: AGREGAR LOS PUNTITOS QUE INDICAN EN QUE SLIDE ESTOY -->
+
+    <!-- ---------------------- -->
+    <!--       MOVIE ROWS       -->
+    <!-- ---------------------- -->
+
+    <!-- *********************** -->
+    <!-- *********************** -->
+    <!-- *********************** -->
+    <!-- *********************** -->
+    <!-- Row 1 -->
+    <section class="movies flex hdn">
+      <!-- Genre name -->
+      <div class="container">
+        <h2>Recommended for you</h2>
+      </div>
+      <!-- Row container -->
+      <div class="movies__row-wrapper">
+        <!-- Movies row -->
+        <div class="movies__row">
+          <div class="movies__card">
+            <img src="src/img/ex/modal__poster-ex.jpg" alt="" />
+          </div>
+          <div class="movies__card">
+            <img src="src/img/ex/batman.webp" alt="" />
+          </div>
+          <div class="movies__card">
+            <img src="src/img/ex/movie-poster-ex.jpg" alt="" />
+          </div>
+          <div class="movies__card">
+            <img src="src/img/ex/tron.jpg" alt="" />
+          </div>
+          <div class="movies__card"></div>
+          <div class="movies__card"></div>
+          <div class="movies__card"></div>
+          <div class="movies__card"></div>
+          <div class="movies__card"></div>
+          <div class="movies__card"></div>
+          <div class="movies__card"></div>
+          <div class="movies__card"></div>
+          <!-- <div class="movies__card"><img src="" alt="" /></div> -->
+        </div>
+
+        <!-- Button previous -->
+        <div class="button__container button__container--previous">
+          <div class="button__box flex center">
+            <ion-icon
+              name="chevron-back-outline"
+              class="button__icon"
+            ></ion-icon>
+          </div>
+        </div>
+
+        <!-- Button next -->
+        <div class="button__container button__container--next">
+          <div class="button__box flex center">
+            <ion-icon
+              name="chevron-forward-outline"
+              class="button__icon"
+            ></ion-icon>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- *********************** -->
+    <!-- *********************** -->
+    <!-- *********************** -->
+    <!-- *********************** -->
+    <!-- Row 2 -->
+    <section class="movies flex hdn">
+      <div class="container">
+        <h2>Spotlight</h2>
+      </div>
+      <!-- Row container -->
+      <div class="movies__row-wrapper">
+        <!-- Movies row -->
+        <div class="movies__row">
+          <div class="movies__card"></div>
+          <div class="movies__card"></div>
+          <div class="movies__card"></div>
+          <div class="movies__card"></div>
+          <!-- <div class="movies__card"><img src="" alt="" /></div> -->
+        </div>
+
+        <!-- Button previous -->
+        <div class="button__container button__container--previous">
+          <div class="button__box flex center">
+            <ion-icon
+              name="chevron-back-outline"
+              class="button__icon"
+            ></ion-icon>
+          </div>
+        </div>
+
+        <!-- Button next -->
+        <div class="button__container button__container--next">
+          <div class="button__box flex center">
+            <ion-icon
+              name="chevron-forward-outline"
+              class="button__icon"
+            ></ion-icon>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------------------- -->
+    <!--     MODAL & OVERLAY    -->
+    <!-- ---------------------- -->
+
+    <!-- *********************** -->
+    <!-- *********************** -->
+    <!-- *********************** -->
+    <!-- *********************** -->
+    <div class="overlay flex center hdn">
+      <div class="modal">
+        <div class="modal__content">
+          <!-- Movie poster -->
+          <div class="modal__movie-poster">
+            <img
+              src="src/img/ex/modal__poster-ex.jpg"
+              alt="Shawshank Redemption poster"
+            />
+          </div>
+          <!-- Movie data -->
+          <div class="modal__movie-data flex">
+            <!-- Wrapper para dejar espacio entre la info y los botones (separarlos) -->
+            <div class="modal__movie-data-wrapper flex">
+              <!-- Chips -->
+              <div class="modal__movie-data--chips">
+                <p class="modal__chip">Drama</p>
+                <p class="modal__chip">Thriller</p>
+                <p class="modal__chip">R</p>
+              </div>
+              <!-- Title -->
+              <div class="modal__movie-data--title">
+                <h3>Shawshank Redemption</h3>
+              </div>
+              <!-- Duration, year, cast -->
+              <div class="modal__movie-data--information flex">
+                <!-- Hacer: con JS hacerlo un único <p> con un template literal -->
+                <!-- Peli = duración, serie = cantidad de temporadas: -->
+                <p>2h 22m &bull; 1994 &bull; Tim Robbins, Morgan Freeman</p>
+              </div>
+              <!-- Plot -->
+              <div class="modal__movie-data--plot">
+                <p>
+                  A banker convicted of murder forms a friendship over a quarter
+                  century with a hardened convict, while maintaining his
+                  innocence and trying to remain hopeful through simple
+                  compassion.
+                </p>
+              </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="modal__movie-data__buttons-container flex">
+              <button
+                class="btn modal__movie-data__button modal__movie-data__button--bookmarks"
+              >
+                Add bookmark
+                <ion-icon name="bookmark-outline" class="icon"></ion-icon>
+              </button>
+              <button
+                class="btn modal__movie-data__button modal__movie-data__button--trailer"
+              >
+                Watch trailer
+                <ion-icon
+                  name="arrow-forward-outline"
+                  class="icon icon--link"
+                ></ion-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Close modal icon -->
+        <div class="modal__close-icon flex center">
+          <ion-icon name="close-outline" class="icon icon--close"></ion-icon>
+        </div>
+      </div>
+    </div>
+
+    <!-- ---------------------- -->
+    <!--     SEARCH RESULTS     -->
+    <!-- ---------------------- -->
+
+    <!-- *********************** -->
+    <!-- *********************** -->
+    <!-- *********************** -->
+    <!-- *********************** -->
+    <div class="results__container container flex hdn">
+      <div class="button__back-container">
+        <button class="button__back btn flex center">
+          <ion-icon
+            name="chevron-back-outline"
+            class="icon icon--back"
+          ></ion-icon>
+          <p>Back</p>
+        </button>
+      </div>
+
+      <h2>Results</h2>
+
+      <div class="results__posters-container">
+        <div class="results__poster movies__card">
+          <img src="src/img/ex/movie-poster-ex.jpg" alt="" />
+        </div>
+        <div class="results__poster movies__card">
+          <img src="src/img/ex/batman.webp" alt="" />
+        </div>
+        <div class="results__poster movies__card"></div>
+        <div class="results__poster movies__card"></div>
+        <div class="results__poster movies__card"></div>
+        <div class="results__poster movies__card"></div>
+        <div class="results__poster movies__card"></div>
+        <div class="results__poster movies__card"></div>
+      </div>
+    </div>
+
+    <!-- ---------------------- -->
+    <!--        BOOKMARKS       -->
+    <!-- ---------------------- -->
+
+    <!-- *********************** -->
+    <!-- *********************** -->
+    <!-- *********************** -->
+    <!-- *********************** -->
+    <div class="results__container container flex hdn">
+      <div class="button__back-container">
+        <button class="button__back btn flex center">
+          <ion-icon
+            name="chevron-back-outline"
+            class="icon icon--back"
+          ></ion-icon>
+          <p>Back</p>
+        </button>
+      </div>
+
+      <h2>Bookmarks</h2>
+
+      <div class="results__posters-container">
+        <div class="results__poster movies__card">
+          <img src="src/img/ex/movie-poster-ex.jpg" alt="" />
+        </div>
+        <div class="results__poster movies__card">
+          <img src="src/img/ex/batman.webp" alt="" />
+        </div>
+        <div class="results__poster movies__card"></div>
+        <div class="results__poster movies__card"></div>
+        <div class="results__poster movies__card"></div>
+        <div class="results__poster movies__card"></div>
+        <div class="results__poster movies__card"></div>
+        <div class="results__poster movies__card"></div>
+      </div>
+    </div>
+
+    <!-- ---------------------- -->
+    <!--         FOOTER         -->
+    <!-- ---------------------- -->
+
+    <!-- Icons -->
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+  </body>
+</html>

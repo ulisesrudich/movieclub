@@ -1,0 +1,560 @@
+/* ---------------------- */
+/*         GENERAL        */
+/* ---------------------- */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+:root {
+  /* Color */
+  --color-white: #fff;
+  --color-black: #101010;
+  --color-grey: #b6b6b6;
+  --color-grey--dark: #272727;
+  --color-purple-light: #9d65ff;
+  --color-purple-dark: #703dc9;
+
+  --color-purple--tint: #d8c1ff;
+  --color-purple--shade: #4f3380;
+
+  --gradient-logo: linear-gradient(to bottom right, #9d65ff, #703dc9);
+  --gradient-background: linear-gradient(to bottom right, #101010, #272727);
+
+  /* Font */
+  --font-size-regular: 1.6rem;
+  --font-size-h2: 2rem;
+  --font-size-h3: 3.6rem;
+
+  /* Spacing */
+  --mg-container: 9.6rem;
+  --mg-sections: 6.4rem;
+  --sm: 2.4rem;
+
+  /* Border */
+  --border-radius-sm: 3px;
+  --border-radius-rounded: 101px;
+
+  /* Buttons */
+  --font-size-buttons: 1.4rem;
+  --font-weight-buttons: 500;
+
+  --padding-buttons: 0 3.2rem;
+
+  --gap-inside-buttons: 0.4rem;
+
+  --border-stroke-width-buttons: 0.3rem;
+
+  /* Icons */
+  --font-size-icons--regular: 2.4rem;
+  --font-size-icons--large: 3rem;
+  --stroke-width-icons--regular: 4.4rem;
+
+  /* Chevron/arrows */
+  --font-size-chevron--regular: 3.6rem;
+  --font-size-chevron--hover: 4.4rem;
+
+  /* Shadows */
+  --box-shadow: 0.8rem 1.6rem 4.8rem rgba(10, 10, 10, 0.15);
+
+  /* Nav bar section */
+  --max-width-logo: 17.6rem;
+
+  --max-width-search-bar: 48rem;
+  --padding-search-bar: 2rem 3.2rem;
+  --letter-spacing-search-bar: -0.5;
+
+  --padding-vertical-bookmarks-button: 2rem;
+
+  /* Slider section */
+  --max-height-slider: 80vh;
+
+  /* Movies section */
+  --gap-h2-and-movie-row: 1.6rem;
+  --gap-movie-posters: 1.6rem;
+
+  --width-movie-poster: 20.8rem;
+  --height-movie-poster: 30.4rem;
+
+  /* Modal section */
+  --width-modal: 65vw;
+  --height-modal: 90vh;
+  --padding-modal: 4.8rem 6.4rem;
+  --gap-poster-and-data: 1.6rem;
+
+  --gap-movie-data-items: 1.6rem;
+  --gap-movie-data-chips: 0.4rem;
+  --padding-movie-data-chips: 0.25rem 1.2rem 0.4rem 1.2rem;
+  --line-height-movie-data-plot: 1.6;
+  --padding-vertical-movie-data-buttons: 1.2rem;
+
+  --width-modal-close-icon--div: 5rem;
+  --height-modal-close-icon--div: 5rem;
+  --padding-right-modal-close-icon: 0.4rem;
+
+  /* Search results / bookmarks section */
+  --gap-results-rows: 2.4rem;
+  --gap-results-button-back-and-h2: 4.8rem;
+
+  --padding-results-button--back: 0.8rem 1.6rem 0.8rem 0.8rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  font-size: var(--font-size-regular);
+  color: var(--color-white);
+
+  background: var(--gradient-background);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+}
+
+h3 {
+  font-size: var(--font-size-h3);
+}
+
+/* ---------------------- */
+/*        REUSABLE        */
+/* ---------------------- */
+
+/* Utils */
+.container {
+  margin: 0 var(--mg-container);
+}
+
+.flex {
+  display: flex;
+}
+
+.center {
+  justify-content: center;
+  align-items: center;
+}
+
+/* Buttons */
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--gap-inside-buttons);
+  height: 100%;
+
+  font-family: 'Inter', sans-serif;
+  font-size: var(--font-size-buttons);
+  font-weight: var(--font-weight-buttons);
+  text-transform: uppercase;
+  color: var(--color-white);
+
+  padding: var(--padding-buttons);
+
+  border: none;
+  border-radius: var(--border-radius-rounded);
+
+  cursor: pointer;
+
+  transition: all 0.2s ease-in-out;
+}
+
+.button__container {
+  position: absolute;
+  z-index: 10;
+  height: 100%;
+  width: 8rem;
+  background-color: rgba(10, 10, 10, 0.04);
+  cursor: pointer;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.button__container:hover {
+  background-color: rgba(10, 10, 10, 0.15);
+}
+
+.button__container--previous {
+  top: 0;
+  left: 0;
+}
+
+.button__container--next {
+  top: 0;
+  right: 0;
+}
+
+.button__box {
+  width: 100%;
+  height: 100%;
+}
+
+.button__icon {
+  font-size: var(--font-size-chevron--regular);
+  color: var(--color-grey);
+  transition: color 0.15s ease-in-out, font-size 0.15s ease-in-out;
+}
+
+.button__container:hover .button__icon {
+  color: var(--color-white);
+  font-size: var(--font-size-chevron--hover);
+}
+
+/* Icons */
+.icon {
+  font-size: var(--font-size-icons--regular);
+  --ionicon-stroke-width: var(--stroke-width-icons--regular);
+  color: var(--color-white);
+}
+
+/* Spacing */
+.mg-top--sm {
+  margin-top: var(--sm);
+}
+
+.padding-top--sm {
+  padding-top: var(--sm);
+}
+
+.padding-bottom--sm {
+  padding-bottom: var(--sm);
+}
+
+/* Invisible */
+.sr-only {
+  position: absolute;
+  inset: 0;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  white-space: nowrap;
+  clip-path: inset(50%);
+  border: 0;
+}
+
+/* ---------------------- */
+/*        SECTIONS        */
+/* ---------------------- */
+
+/* ****** */
+/* Navbar */
+.nav {
+  align-items: center;
+  justify-content: space-between;
+
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.nav__bg {
+  /* Hacer: con JS, saco esta clase cuando estoy arriba de todo (fondo transparente), y la agrego cuando hago scroll hacia abajo */
+  background: rgba(10, 10, 10, 0.8);
+  backdrop-filter: blur(8px);
+}
+
+.nav .container {
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav__logo {
+  /* Hacer: al hacerle click me lleva arriba de todo */
+  max-width: var(--max-width-logo);
+  cursor: pointer;
+}
+
+.nav__search {
+  flex: 1;
+  justify-content: center;
+}
+
+.search__wrapper {
+  flex: 1;
+  position: relative;
+  max-width: var(--max-width-search-bar);
+}
+
+.search__field {
+  flex: 1;
+  width: 100%;
+  padding: var(--padding-search-bar);
+  border: none;
+  border-radius: var(--border-radius-rounded);
+
+  font-family: 'Inter', sans-serif;
+  letter-spacing: var(--letter-spacing-search-bar);
+  font-size: var(--font-size-regular);
+}
+
+input::placeholder {
+  font-family: 'Inter', sans-serif;
+  letter-spacing: var(--letter-spacing-search-bar);
+  font-size: var(--font-size-regular);
+}
+
+.search__btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  background: var(--gradient-logo);
+}
+
+.btn--bookmarks {
+  padding-top: var(--padding-vertical-bookmarks-button);
+  padding-bottom: var(--padding-vertical-bookmarks-button);
+  cursor: pointer;
+  border: var(--border-stroke-width-buttons) solid transparent;
+}
+
+.btn--bookmarks:hover {
+  border-color: var(--color-purple-light);
+}
+
+.icon--bookmarks {
+  color: var(--color-purple-light);
+}
+
+/* ****** */
+/* Slider */
+.slider {
+  max-width: 100%;
+  max-height: var(--max-height-slider);
+  overflow: hidden;
+
+  position: relative;
+
+  margin-bottom: var(--mg-sections);
+  border-radius: var(--border-radius-sm);
+}
+
+.slider__wrapper {
+  flex-wrap: nowrap;
+}
+
+.slider__slide {
+  min-width: 100%;
+}
+
+.slider__slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ********** */
+/* Movie Rows */
+.movies {
+  flex-direction: column;
+  gap: var(--gap-h2-and-movie-row);
+
+  margin-bottom: var(--mg-sections);
+}
+
+.movies__row-wrapper {
+  position: relative;
+}
+
+.movies__row {
+  display: flex;
+  gap: var(--gap-movie-posters);
+  overflow: hidden;
+  /* scroll-behavior: smooth; */
+  /* flex: 1; */
+
+  padding: 0 var(--mg-container);
+}
+
+.movies__card {
+  width: var(--width-movie-poster);
+  height: var(--height-movie-poster);
+  border-radius: var(--border-radius-sm);
+  flex: 0 0 auto;
+  overflow: hidden;
+
+  background-color: green;
+}
+
+.movies__card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* *************** */
+/* Modal & Overlay */
+.overlay {
+  position: fixed;
+  z-index: 1001;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(10, 10, 10, 0.75);
+}
+
+/* Hacer: añadir esta clase con JS al elemento <body> cuando se abre el modal, para bloquear scroll del resto de la página (y ver mis notas, truquito padding-right para evitar saltos en el layout): */
+/* body.modal-open {
+  overflow: hidden;
+} */
+
+.modal {
+  position: relative;
+  width: var(--width-modal);
+  height: var(--height-modal);
+  background: var(--gradient-background);
+  padding: var(--padding-modal);
+  border-radius: var(--border-radius-sm);
+  box-shadow: var(--box-shadow);
+}
+
+.modal__content {
+  display: flex;
+  gap: var(--gap-poster-and-data);
+  height: 100%;
+}
+
+.modal__movie-poster {
+  overflow: hidden;
+  width: 50%;
+  height: 100%;
+  border-radius: var(--border-radius-sm);
+}
+
+.modal__movie-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.modal__movie-data {
+  flex-direction: column;
+  justify-content: space-between;
+  width: 50%;
+  height: 100%;
+
+  /* background-color: lightgreen; */
+}
+
+.modal__movie-data-wrapper {
+  flex-direction: column;
+  gap: var(--gap-movie-data-items);
+}
+
+.modal__movie-data--chips {
+  display: flex;
+  gap: var(--gap-movie-data-chips);
+}
+
+.modal__chip {
+  color: var(--color-purple--tint);
+  background-color: var(--color-purple--shade);
+  padding: var(--padding-movie-data-chips);
+  border-radius: var(--border-radius-rounded);
+}
+
+.modal__movie-data--information {
+  color: var(--color-grey);
+}
+
+.modal__movie-data--plot p {
+  line-height: var(--line-height-movie-data-plot);
+}
+
+.modal__movie-data__buttons-container {
+  justify-content: space-between;
+}
+
+.modal__movie-data__button {
+  padding-top: var(--padding-vertical-movie-data-buttons);
+  padding-bottom: var(--padding-vertical-movie-data-buttons);
+  max-width: 50%;
+}
+
+.modal__movie-data__button--bookmarks {
+  background: var(--gradient-logo);
+}
+
+.modal__movie-data__button--trailer {
+  background: none;
+  border: var(--border-stroke-width-buttons) solid var(--color-purple-light);
+}
+
+.icon--link {
+  transform: rotate(-45deg);
+}
+
+.modal__close-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  /* Hago el div más grande que el ícono para que sea fácil clickearlo */
+  width: var(--width-modal-close-icon--div);
+  height: var(--height-modal-close-icon--div);
+  padding-right: var(--padding-right-modal-close-icon);
+
+  cursor: pointer;
+}
+
+.icon--close {
+  font-size: var(--font-size-icons--large);
+}
+
+/* ******************** */
+/* ******************** */
+/* ******************** */
+.hdn {
+  display: none;
+}
+/* ******************** */
+/* ******************** */
+/* ******************** */
+
+/* ************** */
+/* Search Results */
+.results__container {
+  flex-direction: column;
+  gap: var(--gap-h2-and-movie-row);
+  margin-top: var(--sm);
+}
+
+.button__back-container {
+  margin-bottom: var(--gap-results-button-back-and-h2);
+}
+
+.button__back {
+  gap: 0;
+  background-color: var(--color-purple--shade);
+  color: var(--color-purple--tint);
+  padding: var(--padding-results-button--back);
+}
+
+.icon--back {
+  color: var(--color-purple--tint);
+}
+
+.results__posters-container {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(var(--width-movie-poster), 1fr)
+  );
+  row-gap: var(--gap-results-rows);
+
+  width: 100%;
+  height: 100%;
+}
