@@ -208,7 +208,9 @@
     <!-- *********************** -->
     <!-- *********************** -->
     <!-- *********************** -->
+    <!-- Overlay -->
     <div class="overlay flex center hdn">
+      <!-- Modal -->
       <div class="modal">
         <div class="modal__content">
           <!-- Movie poster -->
@@ -234,7 +236,6 @@
               </div>
               <!-- Duration, year, cast -->
               <div class="modal__movie-data--information flex">
-                <!-- Hacer: con JS hacerlo un único <p> con un template literal -->
                 <!-- Peli = duración, serie = cantidad de temporadas: -->
                 <p>2h 22m &bull; 1994 &bull; Tim Robbins, Morgan Freeman</p>
               </div>
@@ -251,12 +252,14 @@
 
             <!-- Buttons -->
             <div class="modal__movie-data__buttons-container flex">
+              <!-- Add bookmark -->
               <button
                 class="btn modal__movie-data__button modal__movie-data__button--bookmarks"
               >
                 Add bookmark
                 <ion-icon name="bookmark-outline" class="icon"></ion-icon>
               </button>
+              <!-- Watch trailer -->
               <button
                 class="btn modal__movie-data__button modal__movie-data__button--trailer"
               >
@@ -285,7 +288,9 @@
     <!-- *********************** -->
     <!-- *********************** -->
     <!-- *********************** -->
+    <!-- Results/Bookmarks container -->
     <div class="results__container container flex hdn">
+      <!-- Button back -->
       <div class="button__back-container">
         <button class="button__back btn flex center">
           <ion-icon
@@ -296,12 +301,16 @@
         </button>
       </div>
 
+      <!-- h2 -->
       <h2>Results</h2>
 
+      <!-- Movie posters container -->
       <div class="results__posters-container">
+        <!-- Poster 1 -->
         <div class="results__poster movies__card">
           <img src="src/img/ex/movie-poster-ex.jpg" alt="" />
         </div>
+        <!-- Poster 2 -->
         <div class="results__poster movies__card">
           <img src="src/img/ex/batman.webp" alt="" />
         </div>
@@ -322,7 +331,9 @@
     <!-- *********************** -->
     <!-- *********************** -->
     <!-- *********************** -->
+    <!-- Results/Bookmarks container -->
     <div class="results__container container flex hdn">
+      <!-- Button back -->
       <div class="button__back-container">
         <button class="button__back btn flex center">
           <ion-icon
@@ -333,12 +344,16 @@
         </button>
       </div>
 
+      <!-- h2 -->
       <h2>Bookmarks</h2>
 
+      <!-- Movie posters container -->
       <div class="results__posters-container">
+        <!-- Poster 1 -->
         <div class="results__poster movies__card">
           <img src="src/img/ex/movie-poster-ex.jpg" alt="" />
         </div>
+        <!-- Poster 2 -->
         <div class="results__poster movies__card">
           <img src="src/img/ex/batman.webp" alt="" />
         </div>
@@ -355,12 +370,12 @@
     <!--         FOOTER         -->
     <!-- ---------------------- -->
     <div class="footer container">
+      <!-- Footer line -->
+      <div class="footer__line"></div>
       <!-- Footer content -->
       <div class="footer__content flex center">
         <!-- Logo -->
-        <div class="footer__logo-box">
-          <img src="src/img/logo.png" alt="Logo" class="nav__logo" />
-        </div>
+        <img src="src/img/logo.png" alt="Logo" class="nav__logo" />
 
         <!-- Dash -->
         <p>&mdash;</p>
