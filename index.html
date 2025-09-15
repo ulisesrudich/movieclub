@@ -21,35 +21,45 @@
     <!--         NAVBAR         -->
     <!-- ---------------------- -->
     <!-- Nav background -->
-    <nav class="nav nav__bg">
-      <!-- Nav content -->
-      <div class="flex container padding-top--sm padding-bottom--sm">
-        <!-- Logo -->
-        <img src="src/img/logo.png" alt="Logo" class="nav__logo" />
-        <!-- Search bar -->
-        <form class="nav__search flex">
-          <div class="search__wrapper">
-            <input
-              type="text"
-              class="search__field"
-              placeholder="Search any movie or show..."
-            />
-            <button class="btn search__btn">
-              <span class="hidden">Search</span>
-              <ion-icon name="search-outline" class="icon"></ion-icon>
-            </button>
-          </div>
-        </form>
-        <!-- Bookmarks button -->
-        <div class="btn btn--bookmarks flex center">
-          <span class="hidden">Bookmarks</span>
-          <ion-icon
-            name="bookmark-outline"
-            class="icon icon--bookmarks"
-          ></ion-icon>
+    <header class="nav nav__bg">
+      <nav>
+        <!-- Nav content -->
+        <div class="flex container padding-top--sm padding-bottom--sm">
+          <!-- Logo -->
+          <a href="#"
+            ><img src="src/img/logo.png" alt="MovieClub Logo" class="nav__logo"
+          /></a>
+          <!-- Search bar -->
+          <form class="nav__search flex">
+            <div class="search__wrapper">
+              <input
+                type="text"
+                class="search__field"
+                placeholder="Search any movie or show..."
+              />
+              <button
+                class="btn search__btn"
+                aria-label="Display search results"
+              >
+                <span class="hidden">Search</span>
+                <ion-icon name="search-outline" class="icon"></ion-icon>
+              </button>
+            </div>
+          </form>
+          <!-- Bookmarks button -->
+          <button
+            class="btn btn--bookmarks flex center"
+            aria-label="Display bookmarks"
+          >
+            <span class="hidden">Bookmarks</span>
+            <ion-icon
+              name="bookmark-outline"
+              class="icon icon--bookmarks"
+            ></ion-icon>
+          </button>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </header>
 
     <!-- ---------------------- -->
     <!--         SLIDER         -->
@@ -59,40 +69,70 @@
     <!-- *********************** -->
     <!-- *********************** -->
     <!-- *********************** -->
-    <div class="slider container hdnt">
+    <section class="slider container hdnt" aria-label="Featured movies slider">
       <!-- Para hacer funcionar el slider con JS, debo mover el .slider__wrapper con translateX() -->
       <div class="slider__wrapper flex">
         <!-- Slide 1 -->
         <div class="slider__slide">
-          <img src="src/img/ex/slider-poster-ex.jpg" alt="" />
+          <button
+            class="slider__slide-btn"
+            aria-label=" `Display movieName details` "
+          >
+            <img
+              src="src/img/ex/slider-poster-ex.jpg"
+              alt=" `movieName poster` "
+            />
+          </button>
         </div>
         <!-- Slide 2 -->
         <div class="slider__slide">
-          <img src="src/img/ex/slider-poster-ex.jpg" alt="" />
+          <button
+            class="slider__slide-btn"
+            aria-label=" `Display movieName details` "
+          >
+            <img
+              src="src/img/ex/slider-poster-ex.jpg"
+              alt=" `movieName poster` "
+            />
+          </button>
         </div>
         <!-- Slide 3 -->
         <div class="slider__slide">
-          <img src="src/img/ex/slider-poster-ex.jpg" alt="" />
+          <button
+            class="slider__slide-btn"
+            aria-label=" `Display movieName details` "
+          >
+            <img
+              src="src/img/ex/slider-poster-ex.jpg"
+              alt=" `movieName poster` "
+            />
+          </button>
         </div>
       </div>
 
       <!-- Button previous -->
-      <div class="button__container button__container--previous">
+      <button
+        class="button__container button__container--previous"
+        aria-label="Move to previous slide"
+      >
         <div class="button__box flex center">
           <ion-icon name="chevron-back-outline" class="button__icon"></ion-icon>
         </div>
-      </div>
+      </button>
 
       <!-- Button next -->
-      <div class="button__container button__container--next">
+      <button
+        class="button__container button__container--next"
+        aria-label="Move to next slide"
+      >
         <div class="button__box flex center">
           <ion-icon
             name="chevron-forward-outline"
             class="button__icon"
           ></ion-icon>
         </div>
-      </div>
-    </div>
+      </button>
+    </section>
     <!-- HACER: AGREGAR LOS PUNTITOS QUE INDICAN EN QUE SLIDE ESTOY -->
 
     <!-- ---------------------- -->
@@ -104,101 +144,138 @@
     <!-- *********************** -->
     <!-- *********************** -->
     <!-- Row 1 -->
-    <section class="movies flex hdnt">
-      <!-- Genre name -->
-      <div class="container">
-        <h2>Recommended for you</h2>
-      </div>
-      <!-- Row container -->
-      <div class="movies__row-wrapper">
-        <!-- Movies row -->
-        <div class="movies__row">
-          <div class="movies__card">
-            <img src="src/img/ex/modal__poster-ex.jpg" alt="" />
-          </div>
-          <div class="movies__card">
-            <img src="src/img/ex/batman.webp" alt="" />
-          </div>
-          <div class="movies__card">
-            <img src="src/img/ex/movie-poster-ex.jpg" alt="" />
-          </div>
-          <div class="movies__card">
-            <img src="src/img/ex/tron.jpg" alt="" />
-          </div>
-          <div class="movies__card"></div>
-          <div class="movies__card"></div>
-          <div class="movies__card"></div>
-          <div class="movies__card"></div>
-          <div class="movies__card"></div>
-          <div class="movies__card"></div>
-          <div class="movies__card"></div>
-          <div class="movies__card"></div>
-          <!-- <div class="movies__card"><img src="" alt="" /></div> -->
+    <main class="hdnt">
+      <section class="movies flex" aria-label=" `Recommended for you` ">
+        <div class="container">
+          <!-- Genre name -->
+          <h2>Recommended for you</h2>
         </div>
+        <!-- Row container -->
+        <div class="movies__row-wrapper">
+          <!-- Movies row -->
+          <ul class="movies__row">
+            <li class="movies__card">
+              <button
+                class="movies__card-btn"
+                aria-label=" `Display movieName details` "
+              >
+                <img
+                  src="src/img/ex/modal__poster-ex.jpg"
+                  alt=" `movieName poster` "
+                />
+              </button>
+            </li>
+            <li class="movies__card">
+              <button
+                class="movies__card-btn"
+                aria-label=" `Display movieName details` "
+              >
+                <img src="src/img/ex/batman.webp" alt=" `movieName poster` " />
+              </button>
+            </li>
+            <li class="movies__card">
+              <button
+                class="movies__card-btn"
+                aria-label=" `Display movieName details` "
+              >
+                <img
+                  src="src/img/ex/movie-poster-ex.jpg"
+                  alt=" `movieName poster` "
+                />
+              </button>
+            </li>
+            <li class="movies__card">
+              <button
+                class="movies__card-btn"
+                aria-label=" `Display movieName details` "
+              >
+                <img src="src/img/ex/tron.jpg" alt=" `movieName poster` " />
+              </button>
+            </li>
+            <li class="movies__card"></li>
+            <li class="movies__card"></li>
+            <li class="movies__card"></li>
+            <li class="movies__card"></li>
+            <li class="movies__card"></li>
+            <li class="movies__card"></li>
+            <li class="movies__card"></li>
+            <li class="movies__card"></li>
+            <!-- <li class="movies__card"><img src="" alt="" /></li> -->
+          </ul>
 
-        <!-- Button previous -->
-        <div class="button__container button__container--previous">
-          <div class="button__box flex center">
-            <ion-icon
-              name="chevron-back-outline"
-              class="button__icon"
-            ></ion-icon>
-          </div>
-        </div>
+          <!-- Button previous -->
+          <button
+            class="button__container button__container--previous"
+            aria-label="Move to previous row of movies and shows"
+          >
+            <div class="button__box flex center">
+              <ion-icon
+                name="chevron-back-outline"
+                class="button__icon"
+              ></ion-icon>
+            </div>
+          </button>
 
-        <!-- Button next -->
-        <div class="button__container button__container--next">
-          <div class="button__box flex center">
-            <ion-icon
-              name="chevron-forward-outline"
-              class="button__icon"
-            ></ion-icon>
-          </div>
+          <!-- Button next -->
+          <button
+            class="button__container button__container--next"
+            aria-label="Move to next row of movies and shows"
+          >
+            <div class="button__box flex center">
+              <ion-icon
+                name="chevron-forward-outline"
+                class="button__icon"
+              ></ion-icon>
+            </div>
+          </button>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- *********************** -->
-    <!-- *********************** -->
-    <!-- *********************** -->
-    <!-- *********************** -->
-    <!-- Row 2 -->
-    <section class="movies flex hdnt">
-      <div class="container">
-        <h2>Spotlight</h2>
-      </div>
-      <!-- Row container -->
-      <div class="movies__row-wrapper">
-        <!-- Movies row -->
-        <div class="movies__row">
-          <div class="movies__card"></div>
-          <div class="movies__card"></div>
-          <div class="movies__card"></div>
-          <div class="movies__card"></div>
-          <!-- <div class="movies__card"><img src="" alt="" /></div> -->
+      <!-- Row 2 -->
+      <section class="movies flex" aria-label=" `Spotlight` ">
+        <div class="container">
+          <!-- Genre name -->
+          <h2>Spotlight</h2>
         </div>
+        <!-- Row container -->
+        <div class="movies__row-wrapper">
+          <!-- Movies row -->
+          <ul class="movies__row">
+            <li class="movies__card"></li>
+            <li class="movies__card"></li>
+            <li class="movies__card"></li>
+            <li class="movies__card"></li>
+            <!-- <li class="movies__card"><img src="" alt="" /></li> -->
+          </ul>
 
-        <!-- Button previous -->
-        <div class="button__container button__container--previous">
-          <div class="button__box flex center">
-            <ion-icon
-              name="chevron-back-outline"
-              class="button__icon"
-            ></ion-icon>
-          </div>
-        </div>
+          <!-- Button previous -->
+          <button
+            class="button__container button__container--previous"
+            aria-label="Move to previous row of movies and shows"
+          >
+            <div class="button__box flex center">
+              <ion-icon
+                name="chevron-back-outline"
+                class="button__icon"
+              ></ion-icon>
+            </div>
+          </button>
 
-        <!-- Button next -->
-        <div class="button__container button__container--next">
-          <div class="button__box flex center">
-            <ion-icon
-              name="chevron-forward-outline"
-              class="button__icon"
-            ></ion-icon>
-          </div>
+          <!-- Button next -->
+          <button
+            class="button__container button__container--next"
+            aria-label="Move to next row of movies and shows"
+          >
+            <div class="button__box flex center">
+              <ion-icon
+                name="chevron-forward-outline"
+                class="button__icon"
+              ></ion-icon>
+            </div>
+          </button>
         </div>
-      </div>
-    </section>
+      </section>
+    </main>
 
     <!-- ---------------------- -->
     <!--     MODAL & OVERLAY    -->
@@ -255,13 +332,16 @@
               <!-- Add bookmark -->
               <button
                 class="btn modal__movie-data__button modal__movie-data__button--bookmarks"
+                aria-label="Add bookmark"
               >
                 Add bookmark
                 <ion-icon name="bookmark-outline" class="icon"></ion-icon>
               </button>
               <!-- Watch trailer -->
+              <!-- Este botón debería ser un <a> con atributo target="_blank"? Para que se abra en otra pestaña -->
               <button
                 class="btn modal__movie-data__button modal__movie-data__button--trailer"
+                aria-label="Watch trailer in new tab"
               >
                 Watch trailer
                 <ion-icon
@@ -274,9 +354,9 @@
         </div>
 
         <!-- Close modal icon -->
-        <div class="modal__close-icon flex center">
+        <button class="modal__close-icon flex center" aria-label="Close modal">
           <ion-icon name="close-outline" class="icon icon--close"></ion-icon>
-        </div>
+        </button>
       </div>
     </div>
 
@@ -289,10 +369,16 @@
     <!-- *********************** -->
     <!-- *********************** -->
     <!-- Results/Bookmarks container -->
-    <div class="results__container container flex hdn">
+    <section
+      class="results__container container flex hdn"
+      aria-label=" `Search results / Bookmarks` "
+    >
       <!-- Button back -->
       <div class="button__back-container">
-        <button class="button__back btn flex center">
+        <button
+          class="button__back btn flex center"
+          aria-label="Go back to previous section"
+        >
           <ion-icon
             name="chevron-back-outline"
             class="icon icon--back"
@@ -305,23 +391,37 @@
       <h2>Results</h2>
 
       <!-- Movie posters container -->
-      <div class="results__posters-container">
+      <ul class="results__posters-container">
         <!-- Poster 1 -->
-        <div class="results__poster movies__card">
-          <img src="src/img/ex/movie-poster-ex.jpg" alt="" />
-        </div>
+        <li class="movies__card">
+          <button
+            class="movies__card-btn"
+            aria-label=" `Display movieName details` "
+          >
+            <img
+              src="src/img/ex/movie-poster-ex.jpg"
+              alt=" `movieName poster` "
+            />
+          </button>
+          src="src/img/ex/movie-poster-ex.jpg" alt=" `movieName poster` " />
+        </li>
         <!-- Poster 2 -->
-        <div class="results__poster movies__card">
-          <img src="src/img/ex/batman.webp" alt="" />
-        </div>
-        <div class="results__poster movies__card"></div>
-        <div class="results__poster movies__card"></div>
-        <div class="results__poster movies__card"></div>
-        <div class="results__poster movies__card"></div>
-        <div class="results__poster movies__card"></div>
-        <div class="results__poster movies__card"></div>
-      </div>
-    </div>
+        <li class="movies__card">
+          <button
+            class="movies__card-btn"
+            aria-label=" `Display movieName details` "
+          >
+            <img src="src/img/ex/batman.webp" alt=" `movieName poster` " />
+          </button>
+        </li>
+        <li class="movies__card"></li>
+        <li class="movies__card"></li>
+        <li class="movies__card"></li>
+        <li class="movies__card"></li>
+        <li class="movies__card"></li>
+        <li class="movies__card"></li>
+      </ul>
+    </section>
 
     <!-- ---------------------- -->
     <!--        BOOKMARKS       -->
@@ -332,9 +432,15 @@
     <!-- *********************** -->
     <!-- *********************** -->
     <!-- Results/Bookmarks container -->
-    <div class="results__container container flex hdn">
+    <section
+      class="results__container container flex hdn"
+      aria-label=" `Search results / Bookmarks` "
+    >
       <!-- Button back -->
-      <div class="button__back-container">
+      <div
+        class="button__back-container"
+        aria-label="Go back to previous section"
+      >
         <button class="button__back btn flex center">
           <ion-icon
             name="chevron-back-outline"
@@ -348,34 +454,49 @@
       <h2>Bookmarks</h2>
 
       <!-- Movie posters container -->
-      <div class="results__posters-container">
+      <ul class="results__posters-container">
         <!-- Poster 1 -->
-        <div class="results__poster movies__card">
-          <img src="src/img/ex/movie-poster-ex.jpg" alt="" />
-        </div>
+        <li class="movies__card">
+          <button
+            class="movies__card-btn"
+            aria-label=" `Display movieName details` "
+          >
+            <img
+              src="src/img/ex/movie-poster-ex.jpg"
+              alt=" `movieName poster` "
+            />
+          </button>
+        </li>
         <!-- Poster 2 -->
-        <div class="results__poster movies__card">
-          <img src="src/img/ex/batman.webp" alt="" />
-        </div>
-        <div class="results__poster movies__card"></div>
-        <div class="results__poster movies__card"></div>
-        <div class="results__poster movies__card"></div>
-        <div class="results__poster movies__card"></div>
-        <div class="results__poster movies__card"></div>
-        <div class="results__poster movies__card"></div>
-      </div>
-    </div>
+        <li class="movies__card">
+          <button
+            class="movies__card-btn"
+            aria-label=" `Display movieName details` "
+          >
+            <img src="src/img/ex/batman.webp" alt=" `movieName poster` " />
+          </button>
+        </li>
+        <li class="movies__card"></li>
+        <li class="movies__card"></li>
+        <li class="movies__card"></li>
+        <li class="movies__card"></li>
+        <li class="movies__card"></li>
+        <li class="movies__card"></li>
+      </ul>
+    </section>
 
     <!-- ---------------------- -->
     <!--         FOOTER         -->
     <!-- ---------------------- -->
-    <div class="footer container">
+    <footer class="footer container">
       <!-- Footer line -->
       <div class="footer__line"></div>
       <!-- Footer content -->
       <div class="footer__content flex center">
         <!-- Logo -->
-        <img src="src/img/logo.png" alt="Logo" class="nav__logo" />
+        <a href="#"
+          ><img src="src/img/logo.png" alt="MovieClub Logo" class="nav__logo"
+        /></a>
 
         <!-- Dash -->
         <p>&mdash;</p>
@@ -385,48 +506,76 @@
           <!-- Copyright -->
           <p>
             &copy;2025, designed & developed by
-            <span class="footer__link">Ulises Rudich</span>
+            <a
+              href="https://github.com/"
+              target="_blank"
+              aria-label="Open GitHub"
+              class="footer__link"
+              >Ulises Rudich</a
+            >
           </p>
 
           <!-- Socials container -->
-          <div class="footer__socials-container flex center">
+          <ul class="footer__socials-container flex center">
             <!-- GitHub -->
-            <div
-              class="footer__socials-button footer__socials--github flex center"
-            >
-              <ion-icon name="logo-github" class="icon icon--footer"></ion-icon>
-            </div>
+            <li>
+              <a
+                href="https://github.com/"
+                target="_blank"
+                aria-label="Open GitHub"
+                class="footer__socials-button footer__socials--github flex center"
+              >
+                <ion-icon
+                  name="logo-github"
+                  class="icon icon--footer"
+                ></ion-icon>
+              </a>
+            </li>
             <!-- Linkedin -->
-            <div
-              class="footer__socials-button footer__socials--linkedin flex center"
-            >
-              <ion-icon
-                name="logo-linkedin"
-                class="icon icon--footer"
-              ></ion-icon>
-            </div>
+            <li>
+              <a
+                href="https://linkedin.com/"
+                target="_blank"
+                aria-label="Open Linkedin"
+                class="footer__socials-button footer__socials--linkedin flex center"
+              >
+                <ion-icon
+                  name="logo-linkedin"
+                  class="icon icon--footer"
+                ></ion-icon>
+              </a>
+            </li>
             <!-- Email -->
-            <div
-              class="footer__socials-button footer__socials--email flex center"
-            >
-              <ion-icon
-                name="mail-outline"
-                class="icon icon--footer"
-              ></ion-icon>
-            </div>
+            <li>
+              <a
+                href="mailto:ulises.r@hotmail.com"
+                aria-label="Write an email"
+                class="footer__socials-button footer__socials--email flex center"
+              >
+                <ion-icon
+                  name="mail-outline"
+                  class="icon icon--footer"
+                ></ion-icon>
+              </a>
+            </li>
             <!-- Website -->
-            <div
-              class="footer__socials-button footer__socials--website flex center"
-            >
-              <ion-icon
-                name="globe-outline"
-                class="icon icon--footer"
-              ></ion-icon>
-            </div>
-          </div>
+            <li>
+              <a
+                href="#"
+                target="_self"
+                aria-label="Open website"
+                class="footer__socials-button footer__socials--website flex center"
+              >
+                <ion-icon
+                  name="globe-outline"
+                  class="icon icon--footer"
+                ></ion-icon>
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
-    </div>
+    </footer>
 
     <!-- Icons -->
     <script
