@@ -563,6 +563,12 @@ section.movies:last-of-type {
   border: var(--border-stroke-width-buttons) solid var(--color-purple-light);
 }
 
+.modal__movie-data__button--bookmarks:active,
+.modal__movie-data__button--trailer:active {
+  transform: scale(0.97);
+  transition: transform 0.12s ease-in-out;
+}
+
 .icon--link {
   transform: rotate(-45deg);
 }
