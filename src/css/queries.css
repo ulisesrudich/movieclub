@@ -22,6 +22,7 @@
 
     /* Spacing */
     --mg-container: 8rem;
+    --mg-sections: 5.6rem;
 
     /* Chevron/arrows */
     --width-chevron-container: 7rem;
@@ -52,7 +53,7 @@
     --font-size-h3: 3rem;
 
     /* Modal section */
-    --width-modal: 80vw;
+    --width-modal: 85vw;
     --height-modal: 90vh;
     --padding-modal: 3.2rem 4rem;
   }
@@ -96,10 +97,6 @@
     /* Chevron/arrows */
     --width-chevron-container: 6rem;
 
-    /* Movies section */
-    --width-movie-poster: 19.2rem;
-    --height-movie-poster: 28.8rem;
-
     /* Nav bar section */
     --max-width-logo: 15.2rem;
 
@@ -107,11 +104,63 @@
     --padding-search-bar: 2rem 2.4rem;
 
     --right-displacement-search-button: -10px;
+
+    /* Movies section */
+    --width-movie-poster: 19.2rem;
+    --height-movie-poster: 28.8rem;
+
+    /* Modal section */
+    --width-modal: 90vw;
+    --padding-modal: 3.2rem 3.6rem;
   }
 }
 
 /* 752px */
 @media (max-width: 47em) {
+  /* Modal takes whole screen to display */
+  .overlay {
+    align-items: flex-start;
+  }
+
+  .modal {
+    border-radius: 0;
+    width: 100%;
+    min-height: 100vh;
+    height: auto;
+  }
+
+  .modal__content {
+    flex-direction: column;
+    gap: 2.4rem;
+  }
+
+  .modal__movie-poster {
+    width: 100%;
+    max-height: 40rem;
+  }
+
+  .modal__movie-data {
+    width: 100%;
+    gap: 4.8rem;
+  }
+
+  .modal__movie-data--chips {
+    font-size: 1.6rem;
+  }
+
+  .modal__movie-data--information {
+    font-size: 1.6rem;
+  }
+
+  .modal__movie-data--plot {
+    font-size: 1.6rem;
+  }
+
+  .modal__movie-data__buttons-container {
+    justify-content: start;
+    gap: 1rem;
+  }
+
   :root {
     /* Spacing */
     --mg-container: 4.8rem;
@@ -123,6 +172,9 @@
     --max-width-logo: 14.4rem;
 
     --max-width-search-bar: 36rem;
+
+    /* Modal section */
+    --padding-modal: 5.6rem 4.8rem 4rem;
   }
 }
 
@@ -130,48 +182,104 @@
 @media (max-width: 45em) {
   /* Navbar in 2 rows for smaller devices */
   .nav .container {
-    flex-direction: column;
-    align-items: stretch;
+    flex-wrap: wrap;
   }
 
-  .nav a {
-    display: inline-flex;
-    width: auto;
+  .nav__logo {
+    order: 1;
   }
 
-  .nav__logo,
   .btn--bookmarks {
-    display: inline-flex;
     order: 1;
   }
 
   .nav__search {
     order: 2;
-    width: 100%;
-  }
-
-  .nav__logo,
-  .btn--bookmarks {
-    display: inline-flex;
-    align-items: center;
-  }
-
-  .nav__logo {
-    margin-right: auto; /* pega el logo a la izquierda */
-  }
-
-  .btn--bookmarks {
-    margin-left: auto; /* pega el botón a la derecha */
+    min-width: 100%;
+    margin-top: 1.6rem;
   }
 
   :root {
-    /* Nav bar section */
-    --max-width-logo: 14.4rem;
+    /* Spacing */
+    --mg-sections: 4.8rem;
 
-    --max-width-search-bar: 44rem;
+    /* Nav bar section */
+    --max-width-logo: 15.2rem;
+
     --max-width-search-bar: 100%;
 
     --right-displacement-search-button: 0;
+
+    /* Movies section */
+    --gap-h2-and-movie-row: 1rem;
+    --gap-movie-posters: 1rem;
+
+    --width-movie-poster: 17.6rem;
+    --height-movie-poster: 27.2rem;
+  }
+}
+
+/* 640px */
+@media (max-width: 40em) {
+  :root {
+    /* Spacing */
+    --mg-container: 3.6rem;
+
+    /* Movies section */
+    --width-movie-poster: 16.8rem;
+    --height-movie-poster: 26.4rem;
+
+    /* Modal section */
+    --padding-modal: 5.6rem 4rem 4rem;
+  }
+}
+
+/* 576px */
+@media (max-width: 36em) {
+  .modal__movie-data {
+    gap: 3.2rem;
+  }
+
+  :root {
+    /* Spacing */
+    --mg-container: 2.4rem;
+    --mg-sections: 4.4rem;
+
+    /* Chevron/arrows */
+    --width-chevron-container: 5.4rem;
+
+    /* Modal section */
+    --padding-modal: 5.6rem 3.2rem 3.2rem;
+  }
+}
+
+/* 512px */
+@media (max-width: 32em) {
+  :root {
+    /* Spacing */
+    --mg-container: 2rem;
+    --mg-sections: 4rem;
+
+    /* Chevron/arrows */
+    --width-chevron-container: 4.8rem;
+
+    /* Modal section */
+    --padding-modal: 5.6rem 2.4rem 2.4rem;
+  }
+}
+
+/* 504px */
+/* Only for search results/bookmarks grid display */
+@media (max-width: 31.5em) {
+  .results__posters-container {
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(var(--width-movie-poster), auto)
+    );
+    justify-content: center;
+    column-gap: 1.6rem;
+    row-gap: 1.6rem;
+    margin-top: 2.4rem;
   }
 }
 
