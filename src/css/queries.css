@@ -1,0 +1,302 @@
+/* rem and em do NOT depend on html font-size in media queries! Instead, 1rem = 1em = 16px - USE EM*/
+
+/* 1344px */
+@media (max-width: 84em) {
+  :root {
+    /* Font */
+    --font-size-h3: 3.4rem;
+
+    /* Modal section */
+    --width-modal: 70vw;
+    --height-modal: 90vh;
+    --padding-modal: 4rem 5.6rem;
+  }
+}
+
+/* 1200px */
+@media (max-width: 75em) {
+  :root {
+    /* Font */
+    --font-size-h2: 1.9rem;
+    --font-size-h3: 3.2rem;
+
+    /* Spacing */
+    --mg-container: 8rem;
+
+    /* Chevron/arrows */
+    --width-chevron-container: 7rem;
+
+    /* Nav bar section */
+    --max-width-logo: 16.8rem;
+
+    --max-width-search-bar: 44rem;
+
+    /* Movies section */
+    --gap-h2-and-movie-row: 1.2rem;
+    --gap-movie-posters: 1.2rem;
+
+    --width-movie-poster: 20rem;
+    --height-movie-poster: 29.6rem;
+
+    /* Modal section */
+    --width-modal: 75vw;
+    --height-modal: 90vh;
+    --padding-modal: 4rem 4.8rem;
+  }
+}
+
+/* 1088px */
+@media (max-width: 68em) {
+  :root {
+    /* Font */
+    --font-size-h3: 3rem;
+
+    /* Modal section */
+    --width-modal: 80vw;
+    --height-modal: 90vh;
+    --padding-modal: 3.2rem 4rem;
+  }
+}
+
+/* 960px */
+@media (max-width: 60em) {
+  :root {
+    /* Font */
+    --font-size-regular: 1.5rem;
+
+    /* Spacing */
+    --mg-container: 6.4rem;
+
+    /* Buttons */
+    --font-size-buttons: 1.3rem;
+    --font-weight-buttons: 500;
+
+    --padding-buttons: 0 3rem;
+
+    /* Chevron/arrows */
+    --width-chevron-container: 6.5rem;
+
+    /* Nav bar section */
+    --max-width-logo: 16rem;
+
+    --max-width-search-bar: 40rem;
+    --padding-search-bar: 2rem 3rem;
+  }
+}
+
+/* 832px */
+@media (max-width: 52em) {
+  :root {
+    /* Font */
+    --font-size-h2: 1.8rem;
+
+    /* Spacing */
+    --mg-container: 5.6rem;
+
+    /* Chevron/arrows */
+    --width-chevron-container: 6rem;
+
+    /* Movies section */
+    --width-movie-poster: 19.2rem;
+    --height-movie-poster: 28.8rem;
+
+    /* Nav bar section */
+    --max-width-logo: 15.2rem;
+
+    --max-width-search-bar: 36rem;
+    --padding-search-bar: 2rem 2.4rem;
+
+    --right-displacement-search-button: -10px;
+  }
+}
+
+/* 752px */
+@media (max-width: 47em) {
+  :root {
+    /* Spacing */
+    --mg-container: 4.8rem;
+
+    /* Buttons */
+    --padding-buttons: 0 2.8rem;
+
+    /* Nav bar section */
+    --max-width-logo: 14.4rem;
+
+    --max-width-search-bar: 36rem;
+  }
+}
+
+/* 720px */
+@media (max-width: 45em) {
+  /* Navbar in 2 rows for smaller devices */
+  .nav .container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .nav a {
+    display: inline-flex;
+    width: auto;
+  }
+
+  .nav__logo,
+  .btn--bookmarks {
+    display: inline-flex;
+    order: 1;
+  }
+
+  .nav__search {
+    order: 2;
+    width: 100%;
+  }
+
+  .nav__logo,
+  .btn--bookmarks {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .nav__logo {
+    margin-right: auto; /* pega el logo a la izquierda */
+  }
+
+  .btn--bookmarks {
+    margin-left: auto; /* pega el botón a la derecha */
+  }
+
+  :root {
+    /* Nav bar section */
+    --max-width-logo: 14.4rem;
+
+    --max-width-search-bar: 44rem;
+    --max-width-search-bar: 100%;
+
+    --right-displacement-search-button: 0;
+  }
+}
+
+/* OMNI */
+/* 84em - 1344px (Smaller desktops) */
+/* 75em - 1200px (Landscape Tablets) */
+/* 59em - 944px (Tablets) */
+/* 44em - 704px (Smaller tablets) */
+/* 34em - 544px (Phones) */
+
+/* CHAT */
+/* 75em - 1200px (Smaller desktops) */
+/* 64em - 1024px (Laptops) */
+/* 48em - 768px (Tablets) */
+/* 36em - 576px (Bigger mobiles) */
+/* 30em - 480px (Smaller mobiles) */
+
+/* ******************************************* */
+
+/*
+:root {
+  // Color
+  --color-white: #fff;
+  --color-black: #101010;
+  --color-grey: #b6b6b6;
+  --color-grey--dark: #272727;
+  --color-purple-light: #9d65ff;
+  --color-purple-dark: #703dc9;
+
+  --color-purple--tint: #d8c1ff;
+  --color-purple--shade: #4f3380;
+
+  --gradient-logo: linear-gradient(to bottom right, #9d65ff, #703dc9);
+  --gradient-background: linear-gradient(to bottom right, #101010, #272727);
+
+  // Font
+  --font-size-regular: 1.6rem;
+  --font-size-h2: 2rem;
+  --font-size-h3: 3.6rem;
+
+  // Spacing
+  --mg-container: 9.6rem;
+  --mg-sections: 6.4rem;
+  --sm: 2.4rem;
+
+  // Border
+  --border-radius-sm: 3px;
+  --border-radius-rounded: 101px;
+
+  // Buttons
+  --font-size-buttons: 1.4rem;
+  --font-weight-buttons: 500;
+
+  --padding-buttons: 0 3.2rem;
+
+  --gap-inside-buttons: 0.4rem;
+
+  --border-stroke-width-buttons: 0.3rem;
+
+  // Icons
+  --font-size-icons--regular: 2.4rem;
+  --font-size-icons--large: 3rem;
+  --stroke-width-icons--regular: 4.4rem;
+
+  // Chevron/arrows
+  --font-size-chevron--regular: 3.6rem;
+  --font-size-chevron--hover: 4.4rem;
+
+  --width-chevron-container: 8rem;
+
+  // Shadows
+  --box-shadow: 0.8rem 1.6rem 4.8rem rgba(10, 10, 10, 0.15);
+
+  // Nav bar section
+  --max-width-logo: 17.6rem;
+
+  --max-width-search-bar: 48rem;
+  --padding-search-bar: 2rem 3.2rem;
+  --letter-spacing-search-bar: -0.3px;
+
+  --right-displacement-search-button: -3px;
+
+  --padding-vertical-bookmarks-button: 2rem;
+
+  // Slider section
+  --max-height-slider: 80vh;
+
+  // Movies section
+  --gap-h2-and-movie-row: 1.6rem;
+  --gap-movie-posters: 1.6rem;
+
+  --width-movie-poster: 20.8rem;
+  --height-movie-poster: 30.4rem;
+
+  // Modal section
+  --width-modal: 65vw;
+  --height-modal: 90vh;
+  --padding-modal: 4.8rem 6.4rem;
+  --gap-poster-and-data: 1.6rem;
+
+  --gap-movie-data-items: 1.6rem;
+  --gap-movie-data-chips: 0.4rem;
+  --padding-movie-data-chips: 0.25rem 1.2rem 0.4rem 1.2rem;
+  --line-height-movie-data-plot: 1.6;
+  --padding-vertical-movie-data-buttons: 1.2rem;
+
+  --width-modal-close-icon--div: 5rem;
+  --height-modal-close-icon--div: 5rem;
+  --padding-right-modal-close-icon: 0.4rem;
+
+  // Search results / bookmarks section
+  --gap-results-rows: 2.4rem;
+  --gap-results-button-back-and-h2: 4.8rem;
+
+  --padding-results-button--back: 0.8rem 1.6rem 0.8rem 0.8rem;
+
+  // Footer section
+  --height-footer-line: 0.1rem;
+  --mg-top-footer-line: 9.6rem;
+
+  --gap-footer-content: 4.8rem;
+  --padding-footer-content: 8rem 0 6.4rem 0;
+
+  --gap-footer-copy-socials: 2.4rem;
+  --gap-footer-social-icons: 1.2rem;
+  --width-height-footer-social-icons: 4.8rem;
+}
+*/
