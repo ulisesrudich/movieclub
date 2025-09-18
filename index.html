@@ -12,8 +12,8 @@
     <!-- Favicon -->
     <link rel="shortcut icon" href="src/img/favicon.png" type="image/x-icon" />
 
-    <!-- type="module" ?? -->
-    <!-- <script defer src="src/js/controller.js"></script> -->
+    <!-- JS -->
+    <script type="module" src="src/js/controller.js"></script>
   </head>
 
   <body class="modal-open">
@@ -73,71 +73,87 @@
     <!-- *********************** -->
     <!-- *********************** -->
     <!-- *********************** -->
-    <section class="slider container hdnt" aria-label="Featured movies slider">
-      <!-- Para hacer funcionar el slider con JS, debo mover el .slider__wrapper con translateX() -->
-      <div class="slider__wrapper flex">
-        <!-- Slide 1 -->
-        <div class="slider__slide">
-          <button
-            class="slider__slide-btn"
-            aria-label=" `Display movieName details` "
-          >
-            <img
-              src="src/img/ex/slider-poster-ex.jpg"
-              alt=" `movieName poster` "
-            />
-          </button>
+    <section
+      class="slider-dots__wrapper container"
+      aria-label="Featured movies slider"
+    >
+      <div class="slider hdnt">
+        <div class="slider__wrapper flex">
+          <!-- Slide 1 -->
+          <div class="slider__slide">
+            <button
+              class="slider__slide-btn"
+              aria-label=" `Display movieName details` "
+            >
+              <img
+                src="src/img/ex/slider-poster-ex.jpg"
+                alt=" `movieName poster` "
+              />
+            </button>
+          </div>
+          <!-- Slide 2 -->
+          <div class="slider__slide">
+            <button
+              class="slider__slide-btn"
+              aria-label=" `Display movieName details` "
+            >
+              <img
+                src="src/img/ex/slider-poster-ex-2.jpg"
+                alt=" `movieName poster` "
+              />
+            </button>
+          </div>
+          <!-- Slide 3 -->
+          <div class="slider__slide">
+            <button
+              class="slider__slide-btn"
+              aria-label=" `Display movieName details` "
+            >
+              <img
+                src="src/img/ex/slider-poster-ex-3.jpeg"
+                alt=" `movieName poster` "
+              />
+            </button>
+          </div>
         </div>
-        <!-- Slide 2 -->
-        <div class="slider__slide">
-          <button
-            class="slider__slide-btn"
-            aria-label=" `Display movieName details` "
-          >
-            <img
-              src="src/img/ex/slider-poster-ex.jpg"
-              alt=" `movieName poster` "
-            />
-          </button>
-        </div>
-        <!-- Slide 3 -->
-        <div class="slider__slide">
-          <button
-            class="slider__slide-btn"
-            aria-label=" `Display movieName details` "
-          >
-            <img
-              src="src/img/ex/slider-poster-ex.jpg"
-              alt=" `movieName poster` "
-            />
-          </button>
-        </div>
+
+        <!-- Button previous -->
+        <button
+          class="button__container button__container--previous btn__slider-prev"
+          aria-label="Move to previous slide"
+        >
+          <div class="button__box flex center">
+            <ion-icon
+              name="chevron-back-outline"
+              class="button__icon"
+            ></ion-icon>
+          </div>
+        </button>
+
+        <!-- Button next -->
+        <button
+          class="button__container button__container--next btn__slider-next"
+          aria-label="Move to next slide"
+        >
+          <div class="button__box flex center">
+            <ion-icon
+              name="chevron-forward-outline"
+              class="button__icon"
+            ></ion-icon>
+          </div>
+        </button>
       </div>
 
-      <!-- Button previous -->
-      <button
-        class="button__container button__container--previous"
-        aria-label="Move to previous slide"
-      >
-        <div class="button__box flex center">
-          <ion-icon name="chevron-back-outline" class="button__icon"></ion-icon>
-        </div>
-      </button>
-
-      <!-- Button next -->
-      <button
-        class="button__container button__container--next"
-        aria-label="Move to next slide"
-      >
-        <div class="button__box flex center">
-          <ion-icon
-            name="chevron-forward-outline"
-            class="button__icon"
-          ></ion-icon>
-        </div>
-      </button>
+      <!-- Slider dots -->
+      <div class="slider__dots flex center">
+        <button
+          class="slider__dot slider__dot--active"
+          aria-label="Go to slide 1"
+        ></button>
+        <button class="slider__dot" aria-label="Go to slide 2"></button>
+        <button class="slider__dot" aria-label="Go to slide 3"></button>
+      </div>
     </section>
-    <!-- HACER: AGREGAR LOS PUNTITOS QUE INDICAN EN QUE SLIDE ESTOY -->
 
     <!-- ---------------------- -->
     <!--       MOVIE ROWS       -->
@@ -290,7 +306,7 @@
     <!-- *********************** -->
     <!-- *********************** -->
     <!-- Overlay -->
-    <div class="overlay flex center hdnt">
+    <div class="overlay flex center hdn">
       <!-- Modal -->
       <div class="modal">
         <div class="modal__content">

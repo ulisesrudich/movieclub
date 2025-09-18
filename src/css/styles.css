@@ -370,40 +370,75 @@ input::placeholder {
 
 /* ****** */
 /* Slider */
+.slider-dots__wrapper {
+  margin-bottom: var(--mg-sections);
+}
+
 .slider {
   max-width: 100%;
-  max-height: var(--max-height-slider);
+  /* max-height: var(--max-height-slider); */
+  height: var(--max-height-slider);
   overflow: hidden;
 
   position: relative;
 
-  margin-bottom: var(--mg-sections);
+  margin-bottom: 1.6rem;
   border-radius: var(--border-radius-sm);
 }
 
 .slider__wrapper {
   flex-wrap: nowrap;
+  height: 100%;
+  transition: transform 0.5s ease;
 }
 
 .slider__slide {
   min-width: 100%;
+  /* flex: 0 0 100%; */
 }
 
 .slider__slide-btn {
   width: 100%;
   height: 100%;
+  border: none;
+  background: var(--gradient-background);
   cursor: pointer;
 }
 
 .slider__slide-btn:active img {
   transform: scale(0.99);
+  border-radius: var(--border-radius-sm);
 }
 
 .slider__slide img {
   width: 100%;
-  height: 100%;
+  height: auto;
+  /* height: 100%; */
   object-fit: cover;
+  display: block;
   transition: transform 0.06s ease-in-out;
+}
+
+.slider__dots {
+  gap: 1rem;
+}
+
+.slider__dot {
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: var(--border-radius-rounded);
+  border: none;
+  background-color: rgba(182, 182, 182, 0.5);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.slider__dot--active {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.slider__dot:hover {
+  background-color: rgba(255, 255, 255, 0.6);
 }
 
 /* ********** */
@@ -456,7 +491,6 @@ section.movies:last-of-type {
   all: unset;
   width: 100%;
   height: 100%;
-  /* position: relative; */
   cursor: pointer;
 }
 
@@ -481,9 +515,9 @@ section.movies:last-of-type {
 }
 
 /* Hacer: añadir esta clase con JS al elemento <body> cuando se abre el modal, para bloquear scroll del resto de la página (y ver mis notas, truquito padding-right para evitar saltos en el layout): */
-body.modal-open {
+/* body.modal-open {
   overflow: hidden;
-}
+} */
 
 .modal {
   position: relative;
