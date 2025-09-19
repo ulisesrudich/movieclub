@@ -68,6 +68,8 @@
 
   --padding-vertical-bookmarks-button: 2rem;
 
+  --nav-height: 8rem;
+
   /* Slider section */
   --max-height-slider: 80vh;
 
@@ -276,17 +278,21 @@ li {
 /* ****** */
 /* Navbar */
 .nav {
-  position: sticky;
-  top: 0;
-  left: 0;
+  position: relative;
   width: 100%;
   z-index: 1000;
 }
 
-.nav__bg {
-  /* Hacer: con JS, saco esta clase cuando estoy arriba de todo (fondo transparente), y la agrego cuando hago scroll hacia abajo */
+.nav--fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
   background: rgba(10, 10, 10, 0.8);
   backdrop-filter: blur(8px);
+}
+
+body.nav-fixed-padding {
+  padding-top: var(--nav-height);
 }
 
 .nav .container {

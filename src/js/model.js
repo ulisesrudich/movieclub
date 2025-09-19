@@ -5,6 +5,7 @@ export const state = {
   },
 };
 
+// Slider
 export const setMaxSlide = function (slidesCount) {
   state.slider.maxSlide = slidesCount;
 };

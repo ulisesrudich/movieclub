@@ -1,9 +1,18 @@
 import * as model from './model.js';
+import navView from './views/navView.js';
 import sliderView from './views/sliderView.js';
 
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import { async } from 'regenerator-runtime';
+// import { entries } from 'core-js/core/array';
+
+// Navbar
+const controlNavDisplay = function (entry) {
+  !entry.isIntersecting
+    ? navView.toggleFixed(true)
+    : navView.toggleFixed(false);
+};
 
 // Slider
 const controlPreviousSlide = function () {
@@ -28,6 +37,8 @@ const controlGoToSlide = function (slide) {
 };
 
 const init = function () {
+  // Navbar
+  navView.observeSlider(controlNavDisplay);
   // Slider
   model.setMaxSlide(sliderView.getSlidesCount());
   sliderView.initialDotsRender(model.state.slider.maxSlide);
