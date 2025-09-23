@@ -1,4 +1,6 @@
-class SliderView {
+import View from './View.js';
+
+class SliderView extends View {
   _slider = document.querySelector('.slider__wrapper');
   _slides = document.querySelectorAll('.slider__slide');
   _buttonPrevious = document.querySelector('.btn__slider-prev');

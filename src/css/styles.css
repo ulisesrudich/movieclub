@@ -68,8 +68,6 @@
 
   --padding-vertical-bookmarks-button: 2rem;
 
-  --nav-height: 8rem;
-
   /* Slider section */
   --max-height-slider: 80vh;
 
@@ -289,10 +287,6 @@ li {
   left: 0;
   background: rgba(10, 10, 10, 0.8);
   backdrop-filter: blur(8px);
-}
-
-body.nav-fixed-padding {
-  padding-top: var(--nav-height);
 }
 
 .nav .container {
@@ -742,7 +736,7 @@ section.movies:last-of-type {
 /* ******************** */
 /* ******************** */
 .hdn {
-  display: none;
+  display: none !important;
 }
 /* ******************** */
 /* ******************** */

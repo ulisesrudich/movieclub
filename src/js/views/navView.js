@@ -1,9 +1,12 @@
+import View from './View.js';
+
 // import { entries } from 'core-js/core/array';
 
-class NavView {
+class NavView extends View {
   _parentEl = document.querySelector('header');
   _slider = document.querySelector('.slider');
   _navHeight = this._parentEl.getBoundingClientRect().height;
+  _logo = document.querySelectorAll('.logo');
 
   toggleFixed(isFixed) {
     if (isFixed) {
@@ -24,20 +27,15 @@ class NavView {
 
     obs.observe(this._slider);
   }
+
+  addHandlerScrollToTop(handler) {
+    this._logo.forEach(logo =>
+      logo.addEventListener('click', function (e) {
+        e.preventDefault();
+        handler();
+      })
+    );
+  }
 }
 
 export default new NavView();
-
-// Cuando intersecto con h2 de section movie rows agrego:
-// .nav {
-//   position: sticky;
-//   top: 0;
-//   left: 0;
-//   width: 100%;
-//   z-index: 1000;
-// }
-
-// .nav__bg {
-//   background: rgba(10, 10, 10, 0.8);
-//   backdrop-filter: blur(8px);
-// }

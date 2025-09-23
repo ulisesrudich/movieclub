@@ -1,6 +1,7 @@
 import * as model from './model.js';
 import navView from './views/navView.js';
 import sliderView from './views/sliderView.js';
+import moviesView from './views/moviesView.js';
 
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
@@ -39,6 +40,7 @@ const controlGoToSlide = function (slide) {
 const init = function () {
   // Navbar
   navView.observeSlider(controlNavDisplay);
+  navView.addHandlerScrollToTop(navView.scrollToTop.bind(navView));
   // Slider
   model.setMaxSlide(sliderView.getSlidesCount());
   sliderView.initialDotsRender(model.state.slider.maxSlide);
