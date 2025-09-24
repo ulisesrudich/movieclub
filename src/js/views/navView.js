@@ -28,7 +28,7 @@ class NavView extends View {
     obs.observe(this._slider);
   }
 
-  addHandlerScrollToTop(handler) {
+  addHandlerLogoClick(handler) {
     this._logo.forEach(logo =>
       logo.addEventListener('click', function (e) {
         e.preventDefault();

@@ -456,16 +456,18 @@ section.movies:last-of-type {
 
 .movies__row-wrapper {
   position: relative;
+  overflow: hidden;
 }
 
 .movies__row {
   display: flex;
   gap: var(--gap-movie-posters);
-  overflow: hidden;
+  /* overflow: hidden; */
   /* scroll-behavior: smooth; */
   /* flex: 1; */
 
   padding: 0 var(--mg-container);
+  transition: transform 0.6s ease-in-out;
 }
 
 .movies__card {
@@ -735,7 +737,7 @@ section.movies:last-of-type {
 
 /* ******************** */
 /* ******************** */
-.hdn {
+.hidden {
   display: none !important;
 }
 /* ******************** */
