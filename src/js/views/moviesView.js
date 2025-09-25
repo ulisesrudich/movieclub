@@ -1,40 +1,144 @@
 import View from './View.js';
 
 class MoviesView extends View {
-  _postersRow = document.querySelector('.movies__row');
-  _posters = document.querySelectorAll('.movies__card');
-  _containerWidth = this._postersRow.offsetWidth;
-  _nextArrow = document.querySelector('.psps'); // Cambiar nombre
+  constructor() {
+    super();
+    this._initRows();
+  }
 
-  _distanceAlreadyMoved = 0;
+  _initRows() {
+    const rowWrapper = document.querySelectorAll('.movies__row-wrapper');
 
-  findNextPoster() {
-    const firstPosterOffsetLeft = this._posters[0].offsetLeft;
-    let lastPosterOffsetLeft = 0 + this._distanceAlreadyMoved;
-    let nextPosterIndex = 0;
+    rowWrapper.forEach(row => {
+      const postersRow = row.querySelector('.movies__row');
+      const posters = row.querySelectorAll('.movies__card');
+      const prevArrow = row.querySelector('.button__container--previous');
+      const nextArrow = row.querySelector('.button__container--next');
 
-    for (let i = 0; i < this._posters.length; i++) {
-      const poster = this._posters[i];
-      const posterOffsetRight = poster.offsetLeft + poster.offsetWidth;
+      // Visible width of posters container
+      const containerWidth = postersRow.offsetWidth;
 
-      if (posterOffsetRight > this._containerWidth) {
-        lastPosterOffsetLeft = poster.offsetLeft;
-        nextPosterIndex = i;
-        break;
+      // Scrolled distance
+      let scrolledDistance = 0;
+
+      // Function to move row
+      function moveRow(distance) {
+        postersRow.style.transform = `translateX(${-distance}px)`;
       }
-    }
 
-    let moveRowDistance = lastPosterOffsetLeft - firstPosterOffsetLeft;
-    this._distanceAlreadyMoved += moveRowDistance;
-    this.moveRow(this._distanceAlreadyMoved);
-  }
+      // Function to show/hide arrow buttons
+      function updateButtons() {
+        // Prev button
+        scrolledDistance <= 0
+          ? prevArrow.classList.add('hidden')
+          : prevArrow.classList.remove('hidden');
 
-  moveRow(distance) {
-    this._postersRow.style.transform = `translateX(${-distance}px)`;
-  }
+        // Next button
+        // Last poster's index
+        const lastIndex = posters.length - 1;
+        // Last poster's offsetRight
+        const lastIndexOffsetRight =
+          posters[lastIndex].offsetLeft +
+          posters[lastIndex].offsetWidth -
+          scrolledDistance;
 
-  addHandlerNextArrow(handler) {
-    this._nextArrow.addEventListener('click', handler);
+        lastIndexOffsetRight <= containerWidth
+          ? nextArrow.classList.add('hidden')
+          : nextArrow.classList.remove('hidden');
+      }
+
+      // Function to move to the next poster
+      function findNextPoster() {
+        // Calc padding-left of postersRow
+        const rowStyles = window.getComputedStyle(postersRow);
+        const paddingLeftRow = parseInt(rowStyles.paddingLeft, 10);
+
+        // Storing index of first fully visible poster in the row
+        let firstVisibleIndex = 0;
+        for (let i = 0; i < posters.length; i++) {
+          if (
+            posters[i].offsetLeft + posters[i].offsetWidth >
+            scrolledDistance + paddingLeftRow
+          ) {
+            firstVisibleIndex = i;
+            break;
+          }
+        }
+
+        // Storing index of the next poster (second fully visible poster in the row)
+        const nextIndex = firstVisibleIndex + 1;
+        if (nextIndex >= posters.length) return;
+
+        // Calc distance to move postersRow
+        let distanceToMove = posters[nextIndex].offsetLeft - paddingLeftRow;
+
+        // Last poster's index
+        const lastIndex = posters.length - 1;
+        // Last poster's offsetRight
+        const lastIndexOffsetRight =
+          posters[lastIndex].offsetLeft +
+          posters[lastIndex].offsetWidth -
+          scrolledDistance;
+        // If last poster is fully visible then no more scrolling is allowed
+        if (lastIndexOffsetRight <= containerWidth) return;
+
+        // Storing total scrolled distance
+        scrolledDistance = distanceToMove;
+
+        // Moving the row
+        moveRow(scrolledDistance);
+        updateButtons();
+      }
+
+      // Function to move to the previous poster
+      function findPrevPoster() {
+        // Calc padding-left of postersRow
+        const rowStyles = window.getComputedStyle(postersRow);
+        const paddingLeftRow = parseInt(rowStyles.paddingLeft, 10);
+
+        // Storing index of first fully visible poster in the row
+        let firstVisibleIndex = 0;
+        for (let i = 0; i < posters.length; i++) {
+          if (
+            posters[i].offsetLeft + posters[i].offsetWidth >
+            scrolledDistance + paddingLeftRow
+          ) {
+            firstVisibleIndex = i;
+            break;
+          }
+        }
+
+        // Storing index of the prev poster
+        const prevIndex = firstVisibleIndex - 1;
+        // If prev poster index is less than 0 then no more scrolling is allowed
+        if (prevIndex < 0) return;
+
+        // Calc distance to move postersRow
+        let distanceToMove = posters[prevIndex].offsetLeft - paddingLeftRow;
+
+        // Storing total scrolled distance
+        scrolledDistance = distanceToMove;
+
+        // Moving the row
+        moveRow(scrolledDistance);
+        updateButtons();
+      }
+
+      prevArrow.addEventListener('click', findPrevPoster);
+      nextArrow.addEventListener('click', findNextPoster);
+
+      updateButtons();
+
+      // Handler prev arrow
+      // function addHandlerPrevArrow() {
+      //   prevArrow.addEventListener('click', findPrevPoster);
+      // }
+
+      // Handler next arrow
+      // function addHandlerNextArrow() {
+      //   nextArrow.addEventListener('click', findNextPoster);
+      // }
+    });
   }
 }
 

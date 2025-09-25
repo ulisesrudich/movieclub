@@ -87,6 +87,7 @@ const init = function () {
   sliderView.addHandlerNext(controlNextSlide);
   sliderView.addHandlerDots(controlGoToSlide);
   // Movie rows
-  moviesView.addHandlerNextArrow(moviesView.findNextPoster.bind(moviesView));
+  // moviesView.addHandlerPrevArrow();
+  // moviesView.addHandlerNextArrow();
 };
 init();
