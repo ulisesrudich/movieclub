@@ -128,16 +128,6 @@ class MoviesView extends View {
       nextArrow.addEventListener('click', findNextPoster);
 
       updateButtons();
-
-      // Handler prev arrow
-      // function addHandlerPrevArrow() {
-      //   prevArrow.addEventListener('click', findPrevPoster);
-      // }
-
-      // Handler next arrow
-      // function addHandlerNextArrow() {
-      //   nextArrow.addEventListener('click', findNextPoster);
-      // }
     });
   }
 }

@@ -3,11 +3,11 @@ import viewManager from './views/viewManager.js';
 import navView from './views/navView.js';
 import sliderView from './views/sliderView.js';
 import moviesView from './views/moviesView.js';
+import modalView from './views/modalView.js';
 
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import { async } from 'regenerator-runtime';
-import viewManager from './views/viewManager.js';
 // import { entries } from 'core-js/core/array';
 
 // Home
@@ -57,7 +57,18 @@ const controlGoToSlide = function (slide) {
   sliderView.slidesMove(slide);
 };
 
-// Movie rows
+// Modal
+const controlOpenModal = function (e, el) {
+  // const clicked = e.currentTarget;
+  const movieId = el.dataset.movieId; // Trae valor del atributo 'data-movie-id' del HTML
+
+  // Traigo info de la película desde el model (desarrollar la función getMovieById() en model.js):
+  // const movieData = model.getMovieById(movieId);
+
+  // modalView._openModal({ movieData });
+  // (movieData es un objeto que tiene toda la data de la película)
+  modalView.openModal();
+};
 
 // Search results
 // CREAR MÉTODO CON EVENT LISTENER EN BOTÓN DE 'SEARCH' EN navView.js, Y USAR EN init():
@@ -86,8 +97,7 @@ const init = function () {
   sliderView.addHandlerPrevious(controlPreviousSlide);
   sliderView.addHandlerNext(controlNextSlide);
   sliderView.addHandlerDots(controlGoToSlide);
-  // Movie rows
-  // moviesView.addHandlerPrevArrow();
-  // moviesView.addHandlerNextArrow();
+  // Modal
+  modalView.addHandlerOpen(controlOpenModal);
 };
 init();

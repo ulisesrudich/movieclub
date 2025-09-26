@@ -517,9 +517,9 @@ section.movies:last-of-type {
 }
 
 /* Hacer: añadir esta clase con JS al elemento <body> cuando se abre el modal, para bloquear scroll del resto de la página (y ver mis notas, truquito padding-right para evitar saltos en el layout): */
-/* body.modal-open {
+body.modal-open {
   overflow: hidden;
-} */
+}
 
 .modal {
   position: relative;
