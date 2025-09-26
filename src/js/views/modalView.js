@@ -9,18 +9,26 @@ class ModalView {
   }
 
   openModal(movieData = {}) {
+    // Calculo width de la scroll bar:
+    const scrollBarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
     // Cosas para cuando implemente la API:
     // Modifico toda la data del modal dinámicamente, según la peli que le haga click:
     // this._modal.querySelector('.modal__movie-data--title h3').textContent = movieData.title;
     this._modal.classList.remove('hidden');
     // Bloqueo el scroll de la página cuando el modal está abierto
     document.body.classList.add('modal-open');
+
+    // Agrego al body padding-right equivalente al ancho de la scroll bar (que desaparece por 'overflow: hidden') para que no haya saltos en el layout:
+    document.body.style.paddingRight = `${scrollBarWidth}px`;
   }
 
   closeModal() {
     this._modal.classList.add('hidden');
     // Desbloqueo el scroll de la página cuando el modal se cierra
     document.body.classList.remove('modal-open');
+    // Saco padding-right que agregué con openModal():
+    document.body.style.paddingRight = '';
   }
 
   addHandlerClose() {
