@@ -14,27 +14,22 @@ import { async } from 'regenerator-runtime';
 // Home
 const controlHome = function () {
   // If user is at home screen, only scroll to top
-  if (model.currentView === 'home') {
+  if (model.state.currentView === 'home') {
     homeView.scrollToTop();
     return;
   }
 
   // If user is not at home screen, render home screen / Render home when page loads
-  controlRenderHome();
+  controlInitHome();
 };
 
-const controlRenderHome = function () {
+const controlInitHome = function () {
   model.setView('home');
   homeView.render(model.state.homeMovies);
 
-  // *
-  sliderView._initParent();
-  sliderView.render(model.state.homeMovies.slice(0, 3));
-  sliderView.initElements();
-  moviesView._initParent();
-  moviesView.render(model.state.homeMovies.slice(3));
-  moviesView.initRows();
-  // *
+  initSlider();
+  initMovies();
+
   homeView.scrollToTop();
 
   // ************
@@ -42,6 +37,13 @@ const controlRenderHome = function () {
 };
 
 // Navbar
+const initNavbar = function () {
+  navView.observeSlider(controlNavDisplay);
+  navView.addHandlerLogoClick(controlHome);
+  navView.addHandlerSearch(controlSearch);
+  navView.addHandlerBookmarks(controlBookmarks);
+};
+
 const controlNavDisplay = function (entry) {
   !entry.isIntersecting
     ? navView.toggleFixed(true)
@@ -49,6 +51,18 @@ const controlNavDisplay = function (entry) {
 };
 
 // Slider
+const initSlider = function () {
+  sliderView._initParent();
+  sliderView.render(model.state.homeMovies.slice(0, 3));
+  sliderView.initElements();
+  model.setMaxSlide(sliderView.getSlidesCount());
+  sliderView.initialDotsRender(model.state.slider.maxSlide);
+  sliderView.slidesMove(0);
+  sliderView.addHandlerPrevious(controlPreviousSlide);
+  sliderView.addHandlerNext(controlNextSlide);
+  sliderView.addHandlerDots(controlGoToSlide);
+};
+
 const controlPreviousSlide = function () {
   model.state.slider.currentSlide === 0
     ? (model.state.slider.currentSlide = model.state.slider.maxSlide)
@@ -68,6 +82,13 @@ const controlNextSlide = function () {
 const controlGoToSlide = function (slide) {
   model.state.slider.currentSlide = slide;
   sliderView.slidesMove(slide);
+};
+
+// Movies
+const initMovies = function () {
+  moviesView._initParent();
+  moviesView.render(model.state.homeMovies.slice(3));
+  moviesView.initRows();
 };
 
 // Search results
@@ -126,19 +147,9 @@ const init = async function () {
   try {
     // Home
     await model.getHomeMoviesAndShows();
-    controlRenderHome();
-    // Slider
-    model.setMaxSlide(sliderView.getSlidesCount());
-    sliderView.initialDotsRender(model.state.slider.maxSlide);
-    sliderView.slidesMove(0);
-    sliderView.addHandlerPrevious(controlPreviousSlide);
-    sliderView.addHandlerNext(controlNextSlide);
-    sliderView.addHandlerDots(controlGoToSlide);
+    controlInitHome(); // initSlider() + initMovies()
     // Navbar
-    navView.observeSlider(controlNavDisplay);
-    navView.addHandlerLogoClick(controlHome);
-    navView.addHandlerSearch(controlSearch);
-    navView.addHandlerBookmarks(controlBookmarks);
+    initNavbar();
     // Modal
     modalView.addHandlerOpen(controlOpenModal);
   } catch (err) {

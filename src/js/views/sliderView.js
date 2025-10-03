@@ -54,6 +54,7 @@ class SliderView extends View {
 
               ${slidesMarkup()}
 
+            </div>
             <!-- Button previous -->
             <button
               class="button__container button__container--previous btn__slider-prev"
