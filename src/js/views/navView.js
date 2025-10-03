@@ -7,7 +7,11 @@ class NavView extends View {
   _slider = document.querySelector('.slider');
   _navHeight = this._parentEl.getBoundingClientRect().height;
   _logo = document.querySelectorAll('.logo');
+  _searchBar = document.querySelector('.nav__search');
+  _searchField = document.querySelector('.search__field');
+  _btnBookmarks = document.querySelector('.btn--bookmarks');
 
+  // Slider
   toggleFixed(isFixed) {
     if (isFixed) {
       this._parentEl.classList.add('nav--fixed');
@@ -25,9 +29,11 @@ class NavView extends View {
       rootMargin: `-${this._navHeight}px`,
     });
 
+    if (!this._slider) return;
     obs.observe(this._slider);
   }
 
+  // Logo
   addHandlerLogoClick(handler) {
     this._logo.forEach(logo =>
       logo.addEventListener('click', function (e) {
@@ -35,6 +41,28 @@ class NavView extends View {
         handler();
       })
     );
+  }
+
+  // Search bar
+  addHandlerSearch(handler) {
+    this._searchBar.addEventListener('submit', function (e) {
+      e.preventDefault();
+      handler();
+    });
+  }
+
+  getInputValue() {
+    return String(this._searchField.value);
+  }
+
+  clearInput() {
+    this._searchField.value = '';
+    this._searchField.blur();
+  }
+
+  // Bookmarks
+  addHandlerBookmarks(handler) {
+    this._btnBookmarks.addEventListener('click', handler);
   }
 }
 

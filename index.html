@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MovieClub &mdash; Browse millions of movies</title>
+    <title>MovieClub &mdash; Browse millions of movies & shows</title>
 
     <!-- Styles -->
     <link rel="stylesheet" href="src/css/styles.css" />
@@ -17,9 +17,7 @@
   </head>
 
   <body>
-    <h1 class="sr-only">
-      MovieClub &mdash; Browse millions of movies & TV shows
-    </h1>
+    <h1 class="sr-only">MovieClub &mdash; Browse millions of movies & shows</h1>
 
     <!-- ---------------------- -->
     <!--         NAVBAR         -->
@@ -67,224 +65,9 @@
     </header>
 
     <!-- ---------------------- -->
-    <!--         SLIDER         -->
+    <!--      APP CONTAINER     -->
     <!-- ---------------------- -->
-    <div class="home">
-      <section
-        class="slider-dots__wrapper container"
-        aria-label="Featured movies slider"
-      >
-        <div class="slider">
-          <div class="slider__wrapper flex">
-            <!-- Slide 1 -->
-            <div class="slider__slide open-modal">
-              <button
-                class="slider__slide-btn"
-                aria-label=" `Display movieName details` "
-              >
-                <img
-                  src="src/img/ex/slider-poster-ex.jpg"
-                  alt=" `movieName poster` "
-                />
-              </button>
-            </div>
-            <!-- Slide 2 -->
-            <div class="slider__slide open-modal">
-              <button
-                class="slider__slide-btn"
-                aria-label=" `Display movieName details` "
-              >
-                <img
-                  src="src/img/ex/slider-poster-ex-2.jpg"
-                  alt=" `movieName poster` "
-                />
-              </button>
-            </div>
-            <!-- Slide 3 -->
-            <div class="slider__slide open-modal">
-              <button
-                class="slider__slide-btn"
-                aria-label=" `Display movieName details` "
-              >
-                <img
-                  src="src/img/ex/slider-poster-ex-3.jpeg"
-                  alt=" `movieName poster` "
-                />
-              </button>
-            </div>
-          </div>
-          <!-- Button previous -->
-          <button
-            class="button__container button__container--previous btn__slider-prev"
-            aria-label="Move to previous slide"
-          >
-            <div class="button__box flex center">
-              <ion-icon
-                name="chevron-back-outline"
-                class="button__icon"
-              ></ion-icon>
-            </div>
-          </button>
-          <!-- Button next -->
-          <button
-            class="button__container button__container--next btn__slider-next"
-            aria-label="Move to next slide"
-          >
-            <div class="button__box flex center">
-              <ion-icon
-                name="chevron-forward-outline"
-                class="button__icon"
-              ></ion-icon>
-            </div>
-          </button>
-        </div>
-        <!-- Slider dots -->
-        <div class="slider__dots flex center">
-          <button
-            class="slider__dot slider__dot--active"
-            aria-label="Go to slide 1"
-          ></button>
-          <button class="slider__dot" aria-label="Go to slide 2"></button>
-          <button class="slider__dot" aria-label="Go to slide 3"></button>
-        </div>
-      </section>
-
-      <!-- ---------------------- -->
-      <!--       MOVIE ROWS       -->
-      <!-- ---------------------- -->
-      <!-- Row 1 -->
-      <main>
-        <section class="movies flex" aria-label=" `Recommended for you` ">
-          <div class="container">
-            <!-- Genre name -->
-            <h2>Recommended for you</h2>
-          </div>
-          <!-- Row container -->
-          <div class="movies__row-wrapper">
-            <!-- Movies row -->
-            <ul class="movies__row">
-              <li class="movies__card">
-                <button
-                  class="movies__card-btn open-modal"
-                  aria-label=" `Display movieName details` "
-                  data-movie-id=""
-                >
-                  <img
-                    src="src/img/ex/modal__poster-ex.jpg"
-                    alt=" `movieName poster` "
-                  />
-                </button>
-              </li>
-              <li class="movies__card">
-                <button
-                  class="movies__card-btn open-modal"
-                  aria-label=" `Display movieName details` "
-                >
-                  <img
-                    src="src/img/ex/batman.webp"
-                    alt=" `movieName poster` "
-                  />
-                </button>
-              </li>
-              <li class="movies__card">
-                <button
-                  class="movies__card-btn open-modal"
-                  aria-label=" `Display movieName details` "
-                >
-                  <img
-                    src="src/img/ex/movie-poster-ex.jpg"
-                    alt=" `movieName poster` "
-                  />
-                </button>
-              </li>
-              <li class="movies__card">
-                <button
-                  class="movies__card-btn open-modal"
-                  aria-label=" `Display movieName details` "
-                >
-                  <img src="src/img/ex/tron.jpg" alt=" `movieName poster` " />
-                </button>
-              </li>
-              <li class="movies__card"></li>
-              <li class="movies__card"></li>
-              <li class="movies__card"></li>
-              <li class="movies__card"></li>
-              <li class="movies__card"></li>
-            </ul>
-            <!-- Button previous -->
-            <button
-              class="button__container button__container--previous hidden"
-              aria-label="Move to previous row of movies and shows"
-            >
-              <div class="button__box flex center">
-                <ion-icon
-                  name="chevron-back-outline"
-                  class="button__icon"
-                ></ion-icon>
-              </div>
-            </button>
-            <!-- Button next -->
-            <button
-              class="button__container button__container--next"
-              aria-label="Move to next row of movies and shows"
-            >
-              <div class="button__box flex center">
-                <ion-icon
-                  name="chevron-forward-outline"
-                  class="button__icon"
-                ></ion-icon>
-              </div>
-            </button>
-          </div>
-        </section>
-
-        <!-- Row 2 -->
-        <section class="movies flex" aria-label=" `Spotlight` ">
-          <div class="container">
-            <!-- Genre name -->
-            <h2>Spotlight</h2>
-          </div>
-          <!-- Row container -->
-          <div class="movies__row-wrapper">
-            <!-- Movies row -->
-            <ul class="movies__row">
-              <li class="movies__card"></li>
-              <li class="movies__card"></li>
-              <li class="movies__card"></li>
-              <li class="movies__card"></li>
-              <li class="movies__card"></li>
-              <li class="movies__card"></li>
-              <li class="movies__card"></li>
-              <!-- <li class="movies__card"><img src="" alt="" /></li> -->
-            </ul>
-            <!-- Button previous -->
-            <button
-              class="button__container button__container--previous hidden"
-              aria-label="Move to previous row of movies and shows"
-            >
-              <div class="button__box flex center">
-                <ion-icon
-                  name="chevron-back-outline"
-                  class="button__icon"
-                ></ion-icon>
-              </div>
-            </button>
-            <!-- Button next -->
-            <button
-              class="button__container button__container--next"
-              aria-label="Move to next row of movies and shows"
-            >
-              <div class="button__box flex center">
-                <ion-icon
-                  name="chevron-forward-outline"
-                  class="button__icon"
-                ></ion-icon>
-              </div>
-            </button>
-          </div>
-        </section>
-      </main>
-    </div>
+    <main class="app-container"></main>
 
     <!-- ---------------------- -->
     <!--     MODAL & OVERLAY    -->
@@ -297,32 +80,35 @@
           <!-- Movie poster -->
           <div class="modal__movie-poster">
             <img
+              class="modal-img"
               src="src/img/ex/modal__poster-ex.jpg"
               alt="Shawshank Redemption poster"
             />
           </div>
           <!-- Movie data -->
           <div class="modal__movie-data flex">
-            <!-- Wrapper para dejar espacio entre la info y los botones (separarlos) -->
+            <!-- Wrapper to space out data and buttons -->
             <div class="modal__movie-data-wrapper flex">
               <!-- Chips -->
               <div class="modal__movie-data--chips">
-                <p class="modal__chip">Drama</p>
-                <p class="modal__chip">Thriller</p>
-                <p class="modal__chip">R</p>
+                <p class="modal__chip modal__chip-1">Drama</p>
+                <p class="modal__chip modal__chip-2">Thriller</p>
+                <p class="modal__chip modal__chip-3">R</p>
               </div>
               <!-- Title -->
               <div class="modal__movie-data--title">
-                <h3>Shawshank Redemption</h3>
+                <h3 class="modal-title">Shawshank Redemption</h3>
               </div>
               <!-- Duration, year, cast -->
               <div class="modal__movie-data--information flex">
                 <!-- Peli = duración, serie = cantidad de temporadas: -->
-                <p>2h 22m &bull; 1994 &bull; Tim Robbins, Morgan Freeman</p>
+                <p class="modal-movie-info">
+                  2h 22m &bull; 1994 &bull; Tim Robbins, Morgan Freeman
+                </p>
               </div>
               <!-- Plot -->
               <div class="modal__movie-data--plot">
-                <p>
+                <p class="modal-overview">
                   A banker convicted of murder forms a friendship over a quarter
                   century with a hardened convict, while maintaining his
                   innocence and trying to remain hopeful through simple
@@ -363,121 +149,6 @@
         </button>
       </div>
     </div>
-
-    <!-- ---------------------- -->
-    <!--     SEARCH RESULTS     -->
-    <!-- ---------------------- -->
-    <!-- Results/Bookmarks container -->
-    <section
-      class="search results__container container flex hidden"
-      aria-label=" `Search results / Bookmarks` "
-    >
-      <!-- Button back -->
-      <div class="button__back-container">
-        <button
-          class="button__back btn flex center"
-          aria-label="Go back to previous section"
-        >
-          <ion-icon
-            name="chevron-back-outline"
-            class="icon icon--back"
-          ></ion-icon>
-          <p>Back</p>
-        </button>
-      </div>
-
-      <!-- h2 -->
-      <h2>Results</h2>
-
-      <!-- Movie posters container -->
-      <ul class="results__posters-container">
-        <!-- Poster 1 -->
-        <li class="movies__card">
-          <button
-            class="movies__card-btn open-modal"
-            aria-label=" `Display movieName details` "
-          >
-            <img
-              src="src/img/ex/movie-poster-ex.jpg"
-              alt=" `movieName poster` "
-            />
-          </button>
-          src="src/img/ex/movie-poster-ex.jpg" alt=" `movieName poster` " />
-        </li>
-        <!-- Poster 2 -->
-        <li class="movies__card">
-          <button
-            class="movies__card-btn open-modal"
-            aria-label=" `Display movieName details` "
-          >
-            <img src="src/img/ex/batman.webp" alt=" `movieName poster` " />
-          </button>
-        </li>
-        <li class="movies__card"></li>
-        <li class="movies__card"></li>
-        <li class="movies__card"></li>
-        <li class="movies__card"></li>
-        <li class="movies__card"></li>
-        <li class="movies__card"></li>
-      </ul>
-    </section>
-
-    <!-- ---------------------- -->
-    <!--        BOOKMARKS       -->
-    <!-- ---------------------- -->
-    <!-- Results/Bookmarks container -->
-    <section
-      class="bookmarks results__container container flex hidden"
-      aria-label=" `Search results / Bookmarks` "
-    >
-      <!-- Button back -->
-      <div
-        class="button__back-container"
-        aria-label="Go back to previous section"
-      >
-        <button class="button__back btn flex center">
-          <ion-icon
-            name="chevron-back-outline"
-            class="icon icon--back"
-          ></ion-icon>
-          <p>Back</p>
-        </button>
-      </div>
-
-      <!-- h2 -->
-      <h2>Bookmarks</h2>
-
-      <!-- Movie posters container -->
-      <ul class="results__posters-container">
-        <!-- Poster 1 -->
-        <li class="movies__card">
-          <button
-            class="movies__card-btn open-modal"
-            aria-label=" `Display movieName details` "
-          >
-            <img
-              src="src/img/ex/movie-poster-ex.jpg"
-              alt=" `movieName poster` "
-            />
-          </button>
-        </li>
-        <!-- Poster 2 -->
-        <li class="movies__card">
-          <button
-            class="movies__card-btn open-modal"
-            aria-label=" `Display movieName details` "
-          >
-            <img src="src/img/ex/batman.webp" alt=" `movieName poster` " />
-          </button>
-        </li>
-        <li class="movies__card"></li>
-        <li class="movies__card"></li>
-        <li class="movies__card"></li>
-        <li class="movies__card"></li>
-        <li class="movies__card"></li>
-        <li class="movies__card"></li>
-      </ul>
-    </section>
 
     <!-- ---------------------- -->
     <!--         FOOTER         -->

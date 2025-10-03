@@ -1,12 +1,172 @@
 import View from './View.js';
+import { getPosterLink } from '../helpers.js';
 
 class MoviesView extends View {
+  _parentEl;
+
   constructor() {
     super();
-    this._initRows();
   }
 
-  _initRows() {
+  _generateMarkup() {
+    const rowsMarkup = (fromMovie, untilMovie) => {
+      if (!this._data || this._data.length === 0) return '';
+
+      let markup = '';
+      for (
+        let i = fromMovie;
+        i <= Math.min(untilMovie, this._data.length - 1);
+        i++
+      ) {
+        markup += `
+        <li class="movies__card">
+          <button
+            class="movies__card-btn open-modal"
+            aria-label="Display ${this._data[i].title} details"
+            data-movie-id="${this._data[i].id}"
+            data-media-type="${this._data[i].mediaType}"
+          >
+            <img
+              src="${getPosterLink('w500', this._data[i].posterPath)}"
+              alt="${this._data[i].title} poster"
+            />
+          </button>
+        </li>`;
+      }
+
+      return markup;
+    };
+
+    return `
+        <!-- Row 1 -->
+        <section class="movies flex" aria-label="Spotlight">
+          <div class="container">
+            <!-- Genre name -->
+            <h2>Spotlight</h2>
+          </div>
+          <!-- Row container -->
+          <div class="movies__row-wrapper">
+            <!-- Movies row -->
+            <ul class="movies__row">
+
+            ${rowsMarkup(3, 18)}
+
+            </ul>
+
+            <!-- Button previous -->
+            <button
+              class="button__container button__container--previous hidden"
+              aria-label="Move to previous row of movies and shows"
+            >
+              <div class="button__box flex center">
+                <ion-icon
+                  name="chevron-back-outline"
+                  class="button__icon"
+                ></ion-icon>
+              </div>
+            </button>
+            <!-- Button next -->
+            <button
+              class="button__container button__container--next"
+              aria-label="Move to next row of movies and shows"
+            >
+              <div class="button__box flex center">
+                <ion-icon
+                  name="chevron-forward-outline"
+                  class="button__icon"
+                ></ion-icon>
+              </div>
+            </button>
+          </div>
+        </section>
+
+        <!-- Row 2 -->
+        <section class="movies flex" aria-label="Upcoming">
+          <div class="container">
+            <!-- Genre name -->
+            <h2>Upcoming</h2>
+          </div>
+          <!-- Row container -->
+          <div class="movies__row-wrapper">
+            <!-- Movies row -->
+            <ul class="movies__row">
+
+              ${rowsMarkup(19, 34)}
+
+            </ul>
+
+            <!-- Button previous -->
+            <button
+              class="button__container button__container--previous hidden"
+              aria-label="Move to previous row of movies and shows"
+            >
+              <div class="button__box flex center">
+                <ion-icon
+                  name="chevron-back-outline"
+                  class="button__icon"
+                ></ion-icon>
+              </div>
+            </button>
+            <!-- Button next -->
+            <button
+              class="button__container button__container--next"
+              aria-label="Move to next row of movies and shows"
+            >
+              <div class="button__box flex center">
+                <ion-icon
+                  name="chevron-forward-outline"
+                  class="button__icon"
+                ></ion-icon>
+              </div>
+            </button>
+          </div>
+        </section>
+
+        <!-- Row 3 -->
+        <section class="movies flex" aria-label="Amazing series">
+          <div class="container">
+            <!-- Genre name -->
+            <h2>Amazing series</h2>
+          </div>
+          <!-- Row container -->
+          <div class="movies__row-wrapper">
+            <!-- Movies row -->
+            <ul class="movies__row">
+
+              ${rowsMarkup(35, 50)}
+
+            </ul>
+
+            <!-- Button previous -->
+            <button
+              class="button__container button__container--previous hidden"
+              aria-label="Move to previous row of movies and shows"
+            >
+              <div class="button__box flex center">
+                <ion-icon
+                  name="chevron-back-outline"
+                  class="button__icon"
+                ></ion-icon>
+              </div>
+            </button>
+            <!-- Button next -->
+            <button
+              class="button__container button__container--next"
+              aria-label="Move to next row of movies and shows"
+            >
+              <div class="button__box flex center">
+                <ion-icon
+                  name="chevron-forward-outline"
+                  class="button__icon"
+                ></ion-icon>
+              </div>
+            </button>
+          </div>
+        </section>
+    `;
+  }
+
+  initRows() {
     const rowWrapper = document.querySelectorAll('.movies__row-wrapper');
 
     rowWrapper.forEach(row => {
@@ -129,6 +289,10 @@ class MoviesView extends View {
 
       updateButtons();
     });
+  }
+
+  _initParent() {
+    this._parentEl = document.querySelector('.movies-container');
   }
 }
 

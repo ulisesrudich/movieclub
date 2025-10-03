@@ -72,6 +72,8 @@
   --max-height-slider: 80vh;
 
   /* Movies section */
+  --gap-between-movie-rows: 4rem;
+
   --gap-h2-and-movie-row: 1.6rem;
   --gap-movie-posters: 1.6rem;
 
@@ -447,7 +449,7 @@ input::placeholder {
   flex-direction: column;
   gap: var(--gap-h2-and-movie-row);
 
-  margin-bottom: var(--mg-sections);
+  margin-bottom: var(--gap-between-movie-rows);
 }
 
 section.movies:last-of-type {
@@ -516,7 +518,6 @@ section.movies:last-of-type {
   overflow-y: auto;
 }
 
-/* Hacer: añadir esta clase con JS al elemento <body> cuando se abre el modal, para bloquear scroll del resto de la página (y ver mis notas, truquito padding-right para evitar saltos en el layout): */
 body.modal-open {
   overflow: hidden;
 }
@@ -555,8 +556,6 @@ body.modal-open {
   justify-content: space-between;
   width: 50%;
   height: 100%;
-
-  /* background-color: lightgreen; */
 }
 
 .modal__movie-data-wrapper {
@@ -619,7 +618,7 @@ body.modal-open {
   top: 0;
   right: 0;
 
-  /* Hago el button más grande que el ícono para que sea fácil clickearlo */
+  /* Making button bigger than the icon so it's easier to click */
   width: var(--width-modal-close-icon--div);
   height: var(--height-modal-close-icon--div);
   padding-right: var(--padding-right-modal-close-icon);

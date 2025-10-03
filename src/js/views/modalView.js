@@ -1,4 +1,5 @@
 import View from './View.js';
+import { getPosterLink } from '../helpers.js';
 
 class ModalView {
   _modal = document.querySelector('.overlay');
@@ -9,26 +10,71 @@ class ModalView {
   }
 
   openModal(movieData = {}) {
-    // Calculo width de la scroll bar:
+    // Fill modal with the data of the clicked title
+    this._fillModalData(movieData);
+
+    // Calc scroll bar width
     const scrollBarWidth =
       window.innerWidth - document.documentElement.clientWidth;
-    // Cosas para cuando implemente la API:
-    // Modifico toda la data del modal dinámicamente, según la peli que le haga click:
-    // this._modal.querySelector('.modal__movie-data--title h3').textContent = movieData.title;
-    this._modal.classList.remove('hidden');
-    // Bloqueo el scroll de la página cuando el modal está abierto
+
+    // Blocking page scroll when the modal is open
     document.body.classList.add('modal-open');
 
-    // Agrego al body padding-right equivalente al ancho de la scroll bar (que desaparece por 'overflow: hidden') para que no haya saltos en el layout:
+    // Adding padding-right to body to compensate for scroll bar disappearing (because of 'overflow: hidden')
     document.body.style.paddingRight = `${scrollBarWidth}px`;
+
+    // Show modal
+    this._modal.classList.remove('hidden');
   }
 
   closeModal() {
+    // Hide modal
     this._modal.classList.add('hidden');
-    // Desbloqueo el scroll de la página cuando el modal se cierra
+
+    // Unblocking page scroll when modal hides
     document.body.classList.remove('modal-open');
-    // Saco padding-right que agregué con openModal():
+
+    // Taking away padding-right from body
     document.body.style.paddingRight = '';
+  }
+
+  _fillModalData(data) {
+    // Img src
+    document.querySelector('.modal-img').src = getPosterLink(
+      'original',
+      data.posterPath
+    );
+
+    // Img alt
+    document.querySelector('.modal-img').alt = `${data.title} poster`;
+
+    // Genre 1
+    document.querySelector('.modal__chip-1').textContent = `${data.genre1}`;
+
+    // Genre 2
+    document.querySelector('.modal__chip-2').textContent = `${data.genre2}`;
+
+    // Chip 3
+    document.querySelector('.modal__chip-3').textContent = `${data.rating}/10`;
+
+    // Title
+    document.querySelector('.modal-title').textContent = `${data.title}`;
+
+    // Duration, release year & cast (2 actors)
+    if (data.mediaType === 'movie') {
+      document.querySelector(
+        '.modal-movie-info'
+      ).textContent = `${data.duration} &bull; ${data.releaseYear} &bull; ${CAST}`;
+    } else {
+      document.querySelector('.modal-movie-info').textContent = `${
+        data.seasons
+      } season${data.seasons > 1 ? 's' : ''} &bull; ${
+        data.releaseYear
+      } &bull; ${CAST}`;
+    }
+
+    // Overview
+    document.querySelector('.modal-overview').textContent = `${data.overview}`;
   }
 
   addHandlerClose() {

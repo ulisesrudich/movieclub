@@ -1,8 +1,9 @@
 import * as model from './model.js';
-import viewManager from './views/viewManager.js';
 import navView from './views/navView.js';
+import homeView from './views/homeView.js';
 import sliderView from './views/sliderView.js';
 import moviesView from './views/moviesView.js';
+import searchBookmarksView from './views/searchBookmarksView.js';
 import modalView from './views/modalView.js';
 
 import 'core-js/stable';
@@ -11,11 +12,33 @@ import { async } from 'regenerator-runtime';
 // import { entries } from 'core-js/core/array';
 
 // Home
-// CREAR MÉTODO CON EVENT LISTENER EN BOTÓN DE 'BACK' EN bookmarksView.js/searchResultsView.js, Y USAR EN init():
-// Se puede poner event listener en un botón que no existe al cargar la página??
-const controlShowHome = function () {
+const controlHome = function () {
+  // If user is at home screen, only scroll to top
+  if (model.currentView === 'home') {
+    homeView.scrollToTop();
+    return;
+  }
+
+  // If user is not at home screen, render home screen / Render home when page loads
+  controlRenderHome();
+};
+
+const controlRenderHome = function () {
   model.setView('home');
-  viewManager.goToView('home');
+  homeView.render(model.state.homeMovies);
+
+  // *
+  sliderView._initParent();
+  sliderView.render(model.state.homeMovies.slice(0, 3));
+  sliderView.initElements();
+  moviesView._initParent();
+  moviesView.render(model.state.homeMovies.slice(3));
+  moviesView.initRows();
+  // *
+  homeView.scrollToTop();
+
+  // ************
+  console.log('Data: ', model.state.homeMovies);
 };
 
 // Navbar
@@ -23,16 +46,6 @@ const controlNavDisplay = function (entry) {
   !entry.isIntersecting
     ? navView.toggleFixed(true)
     : navView.toggleFixed(false);
-};
-
-const controlLogoClick = function () {
-  if (model.state.currentView === 'home') {
-    navView.scrollToTop();
-  } else {
-    model.setView('home');
-    viewManager.goToView('home');
-    navView.scrollToTop();
-  }
 };
 
 // Slider
@@ -57,47 +70,80 @@ const controlGoToSlide = function (slide) {
   sliderView.slidesMove(slide);
 };
 
-// Modal
-const controlOpenModal = function (e, el) {
-  // const clicked = e.currentTarget;
-  const movieId = el.dataset.movieId; // Trae valor del atributo 'data-movie-id' del HTML
-
-  // Traigo info de la película desde el model (desarrollar la función getMovieById() en model.js):
-  // const movieData = model.getMovieById(movieId);
-
-  // modalView._openModal({ movieData });
-  // (movieData es un objeto que tiene toda la data de la película)
-  modalView.openModal();
-};
-
 // Search results
-// CREAR MÉTODO CON EVENT LISTENER EN BOTÓN DE 'SEARCH' EN navView.js, Y USAR EN init():
-const controlShowSearchResults = function () {
-  model.setView('search');
-  viewManager.goToView('search');
+// CREAR MÉTODO CON EVENT LISTENER EN BOTÓN DE 'BACK' EN bookmarksView.js/searchResultsView.js, Y USAR EN init():
+// Se puede poner event listener en un botón que no existe al cargar la página??
+const controlSearch = function () {
+  // Storing user's input on search bar
+  const inputValue = navView.getInputValue();
+  // Clearing input
+  navView.clearInput();
+  // Clearing previously stored results
+  model.state.results = [];
+
+  if (!inputValue) return; // Escribir acá throw new Error para manejar el error
+
+  // Setting currentView to search results
+  model.setView('results');
+  // Llamar a la API con función de model, pasando inputValue:
+  // Ej: model.APIcall(inputValue);
+  // Almacenar lo que devuelve la API en model.state.results
+
+  // Render results
+  searchBookmarksView.render(model.state.results, model.state.currentView);
+  searchBookmarksView.scrollToTop();
 };
 
 // Bookmarks
-// CREAR MÉTODO CON EVENT LISTENER EN BOTÓN DE 'BOOKMARKS' EN navView.js, Y USAR EN init():
-const controlShowBookmarks = function () {
-  model.setView('bookmarks');
-  viewManager.goToView('bookmarks');
+const controlBookmarks = function () {
+  if (model.state.currentView === 'bookmarks') {
+    searchBookmarksView.scrollToTop();
+  } else {
+    model.setView('bookmarks');
+    searchBookmarksView.render(model.state.bookmarks, model.state.currentView);
+    searchBookmarksView.scrollToTop();
+  }
+};
+
+// Modal
+const controlOpenModal = async function (e, el) {
+  // const clicked = e.currentTarget;
+
+  // Storing id & media type
+  const id = el.dataset.movieId; // Trae valor del atributo 'data-movie-id' del HTML
+  const mediaType = el.dataset.mediaType;
+
+  // Getting movie/show by id & media type
+  const movieData = await model.getMovieOrShowById(id, mediaType);
+
+  // Showing modal with data about the clicked movie/show
+  modalView.openModal(movieData);
 };
 
 /////////////////////////////////////////////
 
-const init = function () {
-  // Navbar
-  navView.observeSlider(controlNavDisplay);
-  navView.addHandlerLogoClick(controlLogoClick);
-  // Slider
-  model.setMaxSlide(sliderView.getSlidesCount());
-  sliderView.initialDotsRender(model.state.slider.maxSlide);
-  sliderView.slidesMove(0);
-  sliderView.addHandlerPrevious(controlPreviousSlide);
-  sliderView.addHandlerNext(controlNextSlide);
-  sliderView.addHandlerDots(controlGoToSlide);
-  // Modal
-  modalView.addHandlerOpen(controlOpenModal);
+const init = async function () {
+  try {
+    // Home
+    await model.getHomeMoviesAndShows();
+    controlRenderHome();
+    // Slider
+    model.setMaxSlide(sliderView.getSlidesCount());
+    sliderView.initialDotsRender(model.state.slider.maxSlide);
+    sliderView.slidesMove(0);
+    sliderView.addHandlerPrevious(controlPreviousSlide);
+    sliderView.addHandlerNext(controlNextSlide);
+    sliderView.addHandlerDots(controlGoToSlide);
+    // Navbar
+    navView.observeSlider(controlNavDisplay);
+    navView.addHandlerLogoClick(controlHome);
+    navView.addHandlerSearch(controlSearch);
+    navView.addHandlerBookmarks(controlBookmarks);
+    // Modal
+    modalView.addHandlerOpen(controlOpenModal);
+  } catch (err) {
+    console.error('Error initializing app.', err);
+    // homeView.renderError(...)
+  }
 };
 init();
