@@ -18,6 +18,7 @@ class MoviesView extends View {
         i <= Math.min(untilMovie, this._data.length - 1);
         i++
       ) {
+        console.log('Aquí: ', this._data[i], i);
         markup += `
         <li class="movies__card">
           <button
@@ -49,7 +50,7 @@ class MoviesView extends View {
             <!-- Movies row -->
             <ul class="movies__row">
 
-            ${rowsMarkup(3, 18)}
+            ${rowsMarkup(0, 15)}
 
             </ul>
 
@@ -91,7 +92,7 @@ class MoviesView extends View {
             <!-- Movies row -->
             <ul class="movies__row">
 
-              ${rowsMarkup(19, 34)}
+              ${rowsMarkup(16, 31)}
 
             </ul>
 
@@ -133,7 +134,7 @@ class MoviesView extends View {
             <!-- Movies row -->
             <ul class="movies__row">
 
-              ${rowsMarkup(35, 50)}
+              ${rowsMarkup(32, 47)}
 
             </ul>
 
