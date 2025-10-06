@@ -8,7 +8,7 @@ export const state = {
   },
   homeMovies: [],
   bookmarks: [],
-  results: [],
+  results: [], // search results
 };
 
 // API
@@ -25,7 +25,7 @@ export const parseAPIPropertyNamesModal = function (obj, mediaType) {
     // Parsear para que marque duración con formato => 2h 22m (ahora está en formato 88m):
     duration: obj.runtime
       ? `${Math.floor(obj.runtime / 60)}h ${obj.runtime % 60}m`
-      : undefined,
+      : '1h 30m',
     seasons: obj.number_of_seasons || undefined,
     genre1: obj.genres?.[0]?.name,
     genre2: obj.genres?.[1]?.name,
@@ -41,7 +41,8 @@ export const parseAPIPropertyNamesModal = function (obj, mediaType) {
 export const parseAPIPropertyNamesHome = function (obj, category) {
   return {
     id: obj.id,
-    mediaType: obj.media_type || category?.startsWith('movie') ? 'movie' : 'tv',
+    mediaType:
+      obj.media_type || (category?.startsWith('movie') ? 'movie' : 'tv'),
     title: obj.title || obj.name,
     posterPath: obj.poster_path,
     bigPosterPath: obj.backdrop_path, // Eliminar

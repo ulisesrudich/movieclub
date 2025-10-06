@@ -12,9 +12,9 @@ class SearchBookmarksView extends View {
     this._parentEl.insertAdjacentHTML('afterbegin', markup);
   }
 
-  // Guardar los search results en model.state.results apenas se hace una búsqueda. Para que funcione el código de abajo
   _generateMarkup() {
     const currentView = String(this._view);
+    console.log(this._data);
     const markup = this._data
       .map(
         movie => `
@@ -37,7 +37,7 @@ class SearchBookmarksView extends View {
 
     return `
       <section
-        class="${currentView} results__container container flex hidden"
+        class="${currentView} results__container container flex"
         aria-label="${currentView}"
       >
 

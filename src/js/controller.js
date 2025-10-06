@@ -96,24 +96,31 @@ const initMovies = function () {
 // Search results
 // CREAR MÉTODO CON EVENT LISTENER EN BOTÓN DE 'BACK' EN bookmarksView.js/searchResultsView.js, Y USAR EN init():
 // Se puede poner event listener en un botón que no existe al cargar la página??
-const controlSearch = function () {
+const controlSearch = async function () {
   // Storing user's input on search bar
   const inputValue = navView.getInputValue();
+
   // Clearing input
   navView.clearInput();
+
   // Clearing previously stored results
   model.state.results = [];
 
-  if (!inputValue) return; // Escribir acá throw new Error para manejar el error
+  if (!inputValue) return; // Escribir acá throw new Error para manejar el error!!
 
   // Setting currentView to 'search results'
   model.setView('results');
-  // Llamar a la API con función de model, pasando inputValue:
-  // Ej: model.APIcall(inputValue);
-  // Almacenar lo que devuelve la API en model.state.results
+
+  // Calling API with the search bar user's input
+  await model.getMoviesAndShowsByQuery(inputValue);
+
+  // Parsing API response property names, and storing in new array
+  const searchResults = model.state.results.map(movie =>
+    model.parseAPIPropertyNamesHome(movie, '')
+  );
 
   // Render results
-  searchBookmarksView.render(model.state.results, model.state.currentView);
+  searchBookmarksView.render(searchResults, model.state.currentView);
   searchBookmarksView.scrollToTop();
 };
 
@@ -123,7 +130,14 @@ const controlBookmarks = function () {
     searchBookmarksView.scrollToTop();
   } else {
     model.setView('bookmarks');
-    searchBookmarksView.render(model.state.bookmarks, model.state.currentView);
+
+    // Parsing bookmarks property names, and storing in new array
+    // En realidad podría saltarme este paso si cada vez que guardo un nuevo bookmark, ya guardo su data pasada por model.parseAPIPropertyNamesHome(), así los nombres de las propiedades ya se guardan con el nombre correcto en el array model.state.bookmarks. Borrar "const bookmarks..."
+    const bookmarks = model.state.bookmarks.map(movie =>
+      model.parseAPIPropertyNamesHome(movie, '')
+    );
+
+    searchBookmarksView.render(bookmarks, model.state.currentView);
     searchBookmarksView.scrollToTop();
   }
 };
