@@ -33,11 +33,13 @@ const controlInitHome = function () {
   homeView.scrollToTop();
 
   // ************
+  // ************
   console.log('Data: ', model.state.homeMovies);
 };
 
 // Navbar
 const initNavbar = function () {
+  navView.setSliderElement();
   navView.observeSlider(controlNavDisplay);
   navView.addHandlerLogoClick(controlHome);
   navView.addHandlerSearch(controlSearch);

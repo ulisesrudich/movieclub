@@ -4,8 +4,8 @@ import View from './View.js';
 
 class NavView extends View {
   _parentEl = document.querySelector('header');
-  _slider = document.querySelector('.slider');
-  _navHeight = this._parentEl.getBoundingClientRect().height;
+  _slider;
+  _navHeight;
   _logo = document.querySelectorAll('.logo');
   _searchBar = document.querySelector('.nav__search');
   _searchField = document.querySelector('.search__field');
@@ -31,6 +31,11 @@ class NavView extends View {
 
     if (!this._slider) return;
     obs.observe(this._slider);
+  }
+
+  setSliderElement() {
+    this._slider = document.querySelector('.slider');
+    this._navHeight = this._parentEl.getBoundingClientRect().height;
   }
 
   // Logo
