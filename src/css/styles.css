@@ -88,7 +88,7 @@
 
   --gap-movie-data-items: 1.6rem;
   --gap-movie-data-chips: 0.4rem;
-  --padding-movie-data-chips: 0.25rem 1.2rem 0.4rem 1.2rem;
+  --padding-movie-data-chips: 0.25rem 1.2rem 0.5rem 1.2rem;
   --line-height-movie-data-plot: 1.6;
   --padding-vertical-movie-data-buttons: 1.2rem;
 
@@ -569,6 +569,8 @@ body.modal-open {
 }
 
 .modal__chip {
+  display: flex;
+  align-items: center;
   color: var(--color-purple--tint);
   background-color: var(--color-purple--shade);
   padding: var(--padding-movie-data-chips);

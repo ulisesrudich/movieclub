@@ -1,3 +1,4 @@
+import { getPosterLink } from '../helpers.js';
 import View from './View.js';
 
 class SearchBookmarksView extends View {
@@ -20,13 +21,13 @@ class SearchBookmarksView extends View {
       <li class="movies__card">
         <button
           class="movies__card-btn open-modal"
-          aria-label="Display ${movie.movieName} details"
-          data-movie-id="${movie.movieId}"
+          aria-label="Display ${movie.title} details"
+          data-movie-id="${movie.id}"
           data-media-type="${movie.mediaType}"
         >
           <img
-            src="${movie.movieImg}"
-            alt="${movie.movieName} poster"
+            src="${getPosterLink('w500', movie.posterPath)}"
+            alt="${movie.title} poster"
           />
         </button>
       </li>

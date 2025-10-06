@@ -13,24 +13,24 @@ export const state = {
 
 // API
 // For parsing property names of the data fetched by the API, that will be displayed in the modal
-export const parseAPIPropertyNamesModal = function (obj) {
+export const parseAPIPropertyNamesModal = function (obj, mediaType) {
   return {
     id: obj.id,
-    mediaType: obj.media_type,
+    mediaType: mediaType,
     title: obj.title || obj.name,
     posterPath: obj.poster_path,
-    bigPosterPath: obj.backdrop_path,
+    bigPosterPath: obj.backdrop_path, // Eliminar
     releaseYear: (obj.release_date || obj.first_air_date || '').slice(0, 4),
     overview: obj.overview || 'No overview available',
     // Parsear para que marque duración con formato => 2h 22m (ahora está en formato 88m):
     duration: obj.runtime
       ? `${Math.floor(obj.runtime / 60)}h ${obj.runtime % 60}m`
       : undefined,
+    seasons: obj.number_of_seasons || undefined,
     genre1: obj.genres?.[0]?.name,
     genre2: obj.genres?.[1]?.name,
-    seasons: obj.media_type === 'tv' ? obj.number_of_seasons : undefined,
-    rating: Math.trunc(+obj.vote_average * 10) / 10,
-    // Almacena un array con los nombres de 2 actores:
+    rating: Math.trunc(+obj.vote_average * 10) / 10 || 5,
+    // Array with 2 actors names
     actors: obj.credits?.cast?.slice(0, 2).map(actor => actor.name) || [
       'No credited actors',
     ],
@@ -44,7 +44,7 @@ export const parseAPIPropertyNamesHome = function (obj, category) {
     mediaType: obj.media_type || category?.startsWith('movie') ? 'movie' : 'tv',
     title: obj.title || obj.name,
     posterPath: obj.poster_path,
-    bigPosterPath: obj.backdrop_path,
+    bigPosterPath: obj.backdrop_path, // Eliminar
   };
 };
 
@@ -60,7 +60,7 @@ export const getMovieOrShowById = async function (id, mediaType) {
     );
 
   const data = await res.json();
-  return parseAPIPropertyNamesModal(data);
+  return parseAPIPropertyNamesModal(data, mediaType);
 };
 
 // For showing search results (search bar)
@@ -81,7 +81,7 @@ export const getHomeMoviesAndShows = async function () {
     const [trending, popular, topRated] = await Promise.all([
       fetchCategory(
         'trending/all/day',
-        19,
+        16,
         '&without_genres=10762&without_original_language=ja'
       ),
       fetchCategory('movie/upcoming', 16, '&without_original_language=ja'),

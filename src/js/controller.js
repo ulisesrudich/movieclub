@@ -89,7 +89,7 @@ const controlGoToSlide = function (slide) {
 // Movies
 const initMovies = function () {
   moviesView._initParent();
-  moviesView.render(model.state.homeMovies.slice(3));
+  moviesView.render(model.state.homeMovies);
   moviesView.initRows();
 };
 
@@ -106,7 +106,7 @@ const controlSearch = function () {
 
   if (!inputValue) return; // Escribir acá throw new Error para manejar el error
 
-  // Setting currentView to search results
+  // Setting currentView to 'search results'
   model.setView('results');
   // Llamar a la API con función de model, pasando inputValue:
   // Ej: model.APIcall(inputValue);

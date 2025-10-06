@@ -41,6 +41,7 @@ class ModalView {
   _fillModalData(data) {
     // Img src
     document.querySelector('.modal-img').src = getPosterLink(
+      // Acá no va `${}` ??
       'original',
       data.posterPath
     );
@@ -52,25 +53,30 @@ class ModalView {
     document.querySelector('.modal__chip-1').textContent = `${data.genre1}`;
 
     // Genre 2
-    document.querySelector('.modal__chip-2').textContent = `${data.genre2}`;
+    if (data.genre2) {
+      document.querySelector('.modal__chip-2').classList.remove('hidden');
+      document.querySelector('.modal__chip-2').textContent = `${data.genre2}`;
+    } else {
+      document.querySelector('.modal__chip-2').classList.add('hidden');
+    }
 
     // Chip 3
-    document.querySelector('.modal__chip-3').textContent = `${data.rating}/10`;
+    document.querySelector('.modal__chip-3').textContent = `${data.rating}⭐`;
 
     // Title
     document.querySelector('.modal-title').textContent = `${data.title}`;
 
     // Duration, release year & cast (2 actors)
     if (data.mediaType === 'movie') {
-      document.querySelector(
-        '.modal-movie-info'
-      ).textContent = `${data.duration} &bull; ${data.releaseYear} &bull; ${CAST}`;
+      document.querySelector('.modal-movie-info').innerHTML = `${
+        data.duration
+      } &bull; ${data.releaseYear} &bull; ${data.actors.join(', ')}`;
     } else {
-      document.querySelector('.modal-movie-info').textContent = `${
+      document.querySelector('.modal-movie-info').innerHTML = `${
         data.seasons
       } season${data.seasons > 1 ? 's' : ''} &bull; ${
         data.releaseYear
-      } &bull; ${CAST}`;
+      } &bull; ${data.actors.join(', ')}`;
     }
 
     // Overview

@@ -3,6 +3,15 @@ import { getPosterLink } from '../helpers.js';
 
 class SliderView extends View {
   _parentEl;
+  _imgF1 = new URL('../../img/slider/slider-f1.jpg', import.meta.url);
+  _imgBreaking = new URL(
+    '../../img/slider/slider-breaking-bad.jpg',
+    import.meta.url
+  );
+  _imgCriminal = new URL(
+    '../../img/slider/slider-criminal-minds.jpg',
+    import.meta.url
+  );
 
   initElements() {
     this._slider = this._parentEl.querySelector('.slider__wrapper');
@@ -17,33 +26,6 @@ class SliderView extends View {
   }
 
   _generateMarkup() {
-    const slidesMarkup = () => {
-      if (!this._data || this._data.length === 0) return '';
-
-      let markup = '';
-
-      const slidesCount = Math.min(3, this._data.length);
-
-      for (let i = 0; i < slidesCount; i++) {
-        markup += `
-        <div class="slider__slide open-modal">
-          <button
-            class="slider__slide-btn"
-            aria-label="Display ${this._data[i].title} details"
-            data-movie-id="${this._data[i].id}"
-            data-media-type="${this._data[i].mediaType}"
-          >
-            <img
-              src="${getPosterLink(undefined, this._data[i].bigPosterPath)}"
-              alt="${this._data[i].title} poster"
-            />
-          </button>
-        </div>
-        `;
-      }
-      return markup;
-    };
-
     return `
         <section
           class="slider-dots__wrapper container"
@@ -52,7 +34,50 @@ class SliderView extends View {
           <div class="slider">
             <div class="slider__wrapper flex">
 
-              ${slidesMarkup()}
+              <!-- Slide 1 -->
+              <div class="slider__slide">
+                <button
+                  class="slider__slide-btn open-modal"
+                  aria-label="Display F1 details"
+                  data-movie-id="911430"
+                  data-media-type="movie"
+                >
+                  <img
+                    src="${this._imgF1}"
+                    alt="F1 poster"
+                  />
+                </button>
+              </div>
+
+              <!-- Slide 2 -->
+              <div class="slider__slide">
+                <button
+                  class="slider__slide-btn open-modal"
+                  aria-label="Display Breaking Bad details"
+                  data-movie-id="1396"
+                  data-media-type="tv"
+                >
+                  <img
+                    src="${this._imgBreaking}"
+                    alt="Breaking Bad poster"
+                  />
+                </button>
+              </div>
+
+              <!-- Slide 3 -->
+              <div class="slider__slide">
+                <button
+                  class="slider__slide-btn open-modal"
+                  aria-label="Display Criminal Minds details"
+                  data-movie-id="4057"
+                  data-media-type="tv"
+                >
+                  <img
+                    src="${this._imgCriminal}"
+                    alt="Criminal Minds poster"
+                  />
+                </button>
+              </div>
 
             </div>
             <!-- Button previous -->
