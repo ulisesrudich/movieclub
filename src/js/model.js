@@ -31,9 +31,10 @@ export const parseAPIPropertyNamesModal = function (obj, mediaType) {
     genre2: obj.genres?.[1]?.name,
     rating: Math.trunc(+obj.vote_average * 10) / 10 || 5,
     // Array with 2 actors names
-    actors: obj.credits?.cast?.slice(0, 2).map(actor => actor.name) || [
-      'No credited actors',
-    ],
+    actors:
+      obj.credits.cast.length > 0
+        ? obj.credits.cast.slice(0, 2).map(actor => actor.name)
+        : ['No credited actors'],
   };
 };
 
@@ -70,10 +71,24 @@ export const getMoviesAndShowsByQuery = async function (query) {
     `${BASE_API_URL}/search/multi?api_key=${API_KEY}&query=${query}&language=en-US`
   );
   const data = await res.json();
-  // Filtering out actors and storing results in model.state.results
-  state.results = data.results.filter(
-    item => item.media_type === 'movie' || item.media_type === 'tv'
+
+  // Filtering out actors. Filtering out movies that don't have a poster to display. Limiting to 12 results after the filtering
+  const dataFiltered = data.results
+    .filter(
+      item =>
+        (item.media_type === 'movie' || item.media_type === 'tv') &&
+        item.poster_path &&
+        item.poster_path !== ''
+    )
+    .slice(0, 12);
+
+  // Parsing property names
+  const dataParsed = dataFiltered.map(item =>
+    parseAPIPropertyNamesHome(item, '')
   );
+
+  // Storing results in model.state.results
+  state.results = dataParsed;
 };
 
 // For fetching movies/series shown at the home screen (initial fetch)

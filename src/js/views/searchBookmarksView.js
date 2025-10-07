@@ -14,7 +14,6 @@ class SearchBookmarksView extends View {
 
   _generateMarkup() {
     const currentView = String(this._view);
-    console.log(this._data);
     const markup = this._data
       .map(
         movie => `

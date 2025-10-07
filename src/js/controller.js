@@ -94,8 +94,7 @@ const initMovies = function () {
 };
 
 // Search results
-// CREAR MÉTODO CON EVENT LISTENER EN BOTÓN DE 'BACK' EN bookmarksView.js/searchResultsView.js, Y USAR EN init():
-// Se puede poner event listener en un botón que no existe al cargar la página??
+// CREAR MÉTODO CON EVENT LISTENER EN BOTÓN DE 'BACK' EN searchBookmarksView.js, Y USAR EN init(). Se puede poner event listener en un botón que no existe al cargar la página??
 const controlSearch = async function () {
   // Storing user's input on search bar
   const inputValue = navView.getInputValue();
@@ -111,16 +110,11 @@ const controlSearch = async function () {
   // Setting currentView to 'search results'
   model.setView('results');
 
-  // Calling API with the search bar user's input
+  // Calling API with the search bar user's input (this stores API response in model.state.results)
   await model.getMoviesAndShowsByQuery(inputValue);
 
-  // Parsing API response property names, and storing in new array
-  const searchResults = model.state.results.map(movie =>
-    model.parseAPIPropertyNamesHome(movie, '')
-  );
-
   // Render results
-  searchBookmarksView.render(searchResults, model.state.currentView);
+  searchBookmarksView.render(model.state.results, model.state.currentView);
   searchBookmarksView.scrollToTop();
 };
 

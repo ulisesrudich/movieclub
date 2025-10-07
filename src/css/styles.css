@@ -479,7 +479,7 @@ section.movies:last-of-type {
   flex: 0 0 auto;
   overflow: hidden;
 
-  background-color: green;
+  background-color: var(--color-grey--dark);
 }
 
 .movies__card:hover img {
@@ -598,6 +598,10 @@ body.modal-open {
 
 .modal__movie-data__button--bookmarks {
   background: var(--gradient-logo);
+}
+
+.modal__movie-data__button--bookmarked {
+  background-color: green;
 }
 
 .modal__movie-data__button--trailer {

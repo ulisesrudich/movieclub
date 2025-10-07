@@ -18,7 +18,6 @@ class MoviesView extends View {
         i <= Math.min(untilMovie, this._data.length - 1);
         i++
       ) {
-        console.log('Aquí: ', this._data[i], i);
         markup += `
         <li class="movies__card">
           <button
