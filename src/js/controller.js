@@ -5,6 +5,7 @@ import sliderView from './views/sliderView.js';
 import moviesView from './views/moviesView.js';
 import searchBookmarksView from './views/searchBookmarksView.js';
 import modalView from './views/modalView.js';
+import errorView from './views/errorView.js';
 
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
@@ -27,14 +28,17 @@ const controlInitHome = function () {
   model.setView('home');
   homeView.render(model.state.homeMovies);
 
+  // Rendering error modal
+  if (!model.state.homeMovies)
+    errorView._openErrorModal(
+      'Something went wrong when initializing the app, please refresh the page :)'
+    );
+
   initSlider();
   initMovies();
+  // initIntersectionObserver();
 
   homeView.scrollToTop();
-
-  // ************
-  // ************
-  console.log('Data: ', model.state.homeMovies);
 };
 
 // Navbar
@@ -43,7 +47,7 @@ const initNavbar = function () {
   navView.observeSlider(controlNavDisplay);
   navView.addHandlerLogoClick(controlHome);
   navView.addHandlerSearch(controlSearch);
-  navView.addHandlerBookmarks(controlBookmarks);
+  navView.addHandlerBookmarks(controlRenderBookmarks);
 };
 
 const controlNavDisplay = function (entry) {
@@ -96,59 +100,98 @@ const initMovies = function () {
 // Search results
 // CREAR MÉTODO CON EVENT LISTENER EN BOTÓN DE 'BACK' EN searchBookmarksView.js, Y USAR EN init(). Se puede poner event listener en un botón que no existe al cargar la página??
 const controlSearch = async function () {
-  // Storing user's input on search bar
-  const inputValue = navView.getInputValue();
+  try {
+    // Storing user's input on search bar
+    const inputValue = navView.getInputValue();
 
-  // Clearing input
-  navView.clearInput();
+    // Clearing input
+    navView.clearInput();
 
-  // Clearing previously stored results
-  model.state.results = [];
+    // Clearing previously stored results
+    model.state.results = [];
 
-  if (!inputValue) return; // Escribir acá throw new Error para manejar el error!!
+    if (!inputValue) return;
 
-  // Setting currentView to 'search results'
-  model.setView('results');
+    // Setting currentView to 'search results'
+    model.setView('results');
 
-  // Calling API with the search bar user's input (this stores API response in model.state.results)
-  await model.getMoviesAndShowsByQuery(inputValue);
+    // Calling API with the search bar user's input (this stores API response in model.state.results)
+    await model.getMoviesAndShowsByQuery(inputValue);
 
-  // Render results
-  searchBookmarksView.render(model.state.results, model.state.currentView);
-  searchBookmarksView.scrollToTop();
+    // Handling error if API doesn't have a response for the query
+    if (model.state.results.length === 0)
+      throw new Error(
+        'No results found for your search, please try another one :)'
+      );
+
+    // Render results
+    searchBookmarksView.render(model.state.results, model.state.currentView);
+    searchBookmarksView.scrollToTop();
+  } catch (err) {
+    // Rendering error modal
+    errorView._openErrorModal(err.message);
+  }
 };
 
 // Bookmarks
-const controlBookmarks = function () {
+const controlRenderBookmarks = function () {
   if (model.state.currentView === 'bookmarks') {
     searchBookmarksView.scrollToTop();
   } else {
+    if (model.state.bookmarks.length === 0) {
+      errorView._openErrorModal('No bookmarks yet :)');
+      return;
+    }
+
     model.setView('bookmarks');
 
-    // Parsing bookmarks property names, and storing in new array
-    // En realidad podría saltarme este paso si cada vez que guardo un nuevo bookmark, ya guardo su data pasada por model.parseAPIPropertyNamesHome(), así los nombres de las propiedades ya se guardan con el nombre correcto en el array model.state.bookmarks. Borrar "const bookmarks..."
-    const bookmarks = model.state.bookmarks.map(movie =>
-      model.parseAPIPropertyNamesHome(movie, '')
-    );
-
-    searchBookmarksView.render(bookmarks, model.state.currentView);
+    searchBookmarksView.render(model.state.bookmarks, model.state.currentView);
     searchBookmarksView.scrollToTop();
+  }
+};
+
+const controlAddRemoveBookmarks = function () {
+  if (model.isBookmarked()) {
+    model.state.bookmarks.splice(model.findIndexBookmarked(), 1);
+    modalView.updateBtnBookmarks('removed');
+  } else {
+    model.state.bookmarks.push(model.state.currentlyDisplayedInModal);
+    modalView.updateBtnBookmarks('added');
+  }
+
+  if (model.state.currentView === 'bookmarks') {
+    searchBookmarksView.render(model.state.bookmarks, model.state.currentView);
   }
 };
 
 // Modal
 const controlOpenModal = async function (e, el) {
-  // const clicked = e.currentTarget;
+  try {
+    // const clicked = e.currentTarget;
 
-  // Storing id & media type
-  const id = el.dataset.movieId; // Trae valor del atributo 'data-movie-id' del HTML
-  const mediaType = el.dataset.mediaType;
+    // Storing id & media type
+    const id = el.dataset.movieId; // Trae valor del atributo 'data-movie-id' del HTML
+    const mediaType = el.dataset.mediaType;
 
-  // Getting movie/show by id & media type
-  const movieData = await model.getMovieOrShowById(id, mediaType);
+    // Getting movie/show by id & media type
+    const movieData = await model.getMovieOrShowById(id, mediaType);
 
-  // Showing modal with data about the clicked movie/show
-  modalView.openModal(movieData);
+    // Handling error
+    if (!movieData)
+      throw new Error(
+        'Could not load information about this title, please try another one :)'
+      );
+
+    // Checking what state the bookmarks button should be in
+    if (model.isBookmarked()) modalView.updateBtnBookmarks('added');
+    if (!model.isBookmarked()) modalView.updateBtnBookmarks('removed');
+
+    // Showing modal with data about the clicked movie/show
+    modalView.openModal(movieData);
+  } catch (err) {
+    // Rendering error modal
+    errorView._openErrorModal(err.message);
+  }
 };
 
 /////////////////////////////////////////////
@@ -162,9 +205,12 @@ const init = async function () {
     initNavbar();
     // Modal
     modalView.addHandlerOpen(controlOpenModal);
+    modalView.addHandlerBtnBookmarks(controlAddRemoveBookmarks);
   } catch (err) {
-    console.error('Error initializing app.', err);
-    // homeView.renderError(...)
+    // Rendering error modal
+    errorView._openErrorModal(
+      'An error occurred while initializing the app, please refresh the page :)'
+    );
   }
 };
 init();

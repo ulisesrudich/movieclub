@@ -4,6 +4,8 @@ import { getPosterLink } from '../helpers.js';
 class ModalView {
   _modal = document.querySelector('.overlay');
   _closeButton = document.querySelector('.modal__close-icon');
+  _bookmarksButton = document.querySelector('.bookmarks');
+  _bookmarksIcon = document.querySelector('.bookmarks--icon');
 
   constructor() {
     this.addHandlerClose();
@@ -41,8 +43,7 @@ class ModalView {
   _fillModalData(data) {
     // Img src
     document.querySelector('.modal-img').src = getPosterLink(
-      // Acá no va `${}` ??
-      'original',
+      'w780',
       data.posterPath
     );
 
@@ -83,6 +84,7 @@ class ModalView {
     document.querySelector('.modal-overview').textContent = `${data.overview}`;
   }
 
+  // Modal
   addHandlerClose() {
     this._closeButton.addEventListener('click', () => this.closeModal());
     this._modal.addEventListener('click', e => {
@@ -100,6 +102,35 @@ class ModalView {
       if (!el) return;
       handler(e, el);
     });
+  }
+
+  // Modal button "Add bookmark"
+  addHandlerBtnBookmarks(handler) {
+    this._bookmarksButton.addEventListener('click', handler);
+  }
+
+  updateBtnBookmarks(state) {
+    // Color + text content + icon
+    if (state === 'added') {
+      this._bookmarksButton.innerHTML =
+        'Bookmarked <ion-icon name="checkmark-outline" class="icon bookmarks--icon"></ion-icon>';
+      this._bookmarksButton.classList.remove(
+        'modal__movie-data__button--bookmarks'
+      );
+      this._bookmarksButton.classList.add(
+        'modal__movie-data__button--bookmarked'
+      );
+    }
+    if (state === 'removed') {
+      this._bookmarksButton.innerHTML =
+        'Add bookmark <ion-icon name="bookmark-outline" class="icon bookmarks--icon"></ion-icon>';
+      this._bookmarksButton.classList.remove(
+        'modal__movie-data__button--bookmarked'
+      );
+      this._bookmarksButton.classList.add(
+        'modal__movie-data__button--bookmarks'
+      );
+    }
   }
 }
 

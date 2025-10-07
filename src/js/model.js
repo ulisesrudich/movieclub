@@ -9,6 +9,7 @@ export const state = {
   homeMovies: [],
   bookmarks: [],
   results: [], // search results
+  currentlyDisplayedInModal: '', // movie that's being currently displayed in the modal
 };
 
 // API
@@ -62,6 +63,11 @@ export const getMovieOrShowById = async function (id, mediaType) {
     );
 
   const data = await res.json();
+
+  // Updating currently displayed movie/show
+  state.currentlyDisplayedInModal = '';
+  state.currentlyDisplayedInModal = parseAPIPropertyNamesModal(data, mediaType); // Podría usar parseAPIPropertyNamesHome()
+
   return parseAPIPropertyNamesModal(data, mediaType);
 };
 
@@ -131,6 +137,24 @@ async function fetchCategory(category, quantity, extraParams = '') {
     .map(item => parseAPIPropertyNamesHome(item, category))
     .slice(0, quantity);
 }
+
+// For checking if a title is bookmarked
+export const isBookmarked = function () {
+  return state.bookmarks.some(
+    item =>
+      item.id === state.currentlyDisplayedInModal.id &&
+      item.mediaType === state.currentlyDisplayedInModal.mediaType
+  );
+};
+
+// For finding index of a bookmarked title
+export const findIndexBookmarked = function () {
+  return state.bookmarks.findIndex(
+    item =>
+      item.id === state.currentlyDisplayedInModal.id &&
+      item.mediaType === state.currentlyDisplayedInModal.mediaType
+  );
+};
 
 // View state
 export const setView = function (view) {

@@ -59,6 +59,10 @@
 
 /* 960px */
 @media (max-width: 60em) {
+  .error__modal {
+    padding: 5.6rem 8rem;
+  }
+
   :root {
     /* Font */
     --font-size-regular: 1.5rem;
@@ -162,6 +166,10 @@
     gap: 1rem;
   }
 
+  .error__modal {
+    padding: 4.8rem 7.2rem;
+  }
+
   :root {
     /* Spacing */
     --mg-container: 4.8rem;
@@ -227,6 +235,11 @@
 
 /* 640px */
 @media (max-width: 40em) {
+  .error__modal {
+    padding: 5.6rem 8rem;
+    width: 40rem;
+  }
+
   :root {
     /* Spacing */
     --mg-container: 3.6rem;
@@ -246,6 +259,10 @@
     gap: 3.2rem;
   }
 
+  .error__modal {
+    width: 36rem;
+  }
+
   :root {
     /* Spacing */
     --mg-container: 2.4rem;
@@ -261,6 +278,11 @@
 
 /* 512px */
 @media (max-width: 32em) {
+  .error__modal {
+    padding: 4rem 7.2rem;
+    width: 32rem;
+  }
+
   :root {
     /* Spacing */
     --mg-container: 2rem;

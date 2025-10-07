@@ -121,11 +121,14 @@
             <div class="modal__movie-data__buttons-container flex">
               <!-- Add bookmark -->
               <button
-                class="btn modal__movie-data__button modal__movie-data__button--bookmarks modal__movie-data__button--bookmarked"
+                class="btn bookmarks modal__movie-data__button modal__movie-data__button--bookmarks"
                 aria-label="Add bookmark"
               >
                 Add bookmark
-                <ion-icon name="bookmark-outline" class="icon"></ion-icon>
+                <ion-icon
+                  name="bookmark-outline"
+                  class="icon bookmarks--icon"
+                ></ion-icon>
               </button>
               <!-- Watch trailer -->
               <!-- Este botón debería ser un <a> con atributo target="_blank"? Para que se abra en otra pestaña -->
@@ -145,6 +148,25 @@
 
         <!-- Close modal icon -->
         <button class="modal__close-icon flex center" aria-label="Close modal">
+          <ion-icon name="close-outline" class="icon icon--close"></ion-icon>
+        </button>
+      </div>
+    </div>
+
+    <!-- ---------------------- -->
+    <!--       ERROR MODAL      -->
+    <!-- ---------------------- -->
+    <!-- Overlay -->
+    <div class="error__overlay hidden">
+      <!-- Modal -->
+      <div class="error__modal">
+        <!-- Message -->
+        <p class="error__message">
+          Could not load movie, please try another one :)
+        </p>
+
+        <!-- Close modal icon -->
+        <button class="error__close-icon flex center" aria-label="Close modal">
           <ion-icon name="close-outline" class="icon icon--close"></ion-icon>
         </button>
       </div>
