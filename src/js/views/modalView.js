@@ -24,6 +24,12 @@ class ModalView {
 
     // Adding padding-right to body to compensate for scroll bar disappearing (because of 'overflow: hidden')
     document.body.style.paddingRight = `${scrollBarWidth}px`;
+    // And to nav when it has 'position: fixed' (not part of the body)
+    if (document.querySelector('.nav').classList.contains('nav--fixed')) {
+      document.querySelector(
+        '.nav__content'
+      ).style.paddingRight = `${scrollBarWidth}px`;
+    }
 
     // Show modal
     this._modal.classList.remove('hidden');
@@ -38,6 +44,10 @@ class ModalView {
 
     // Taking away padding-right from body
     document.body.style.paddingRight = '';
+    // And from nav when it has 'position: fixed' (not part of the body)
+    if (document.querySelector('.nav').classList.contains('nav--fixed')) {
+      document.querySelector('.nav__content').style.paddingRight = '';
+    }
   }
 
   _fillModalData(data) {

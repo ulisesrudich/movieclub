@@ -601,7 +601,7 @@ section.movies:last-of-type {
 }
 
 .modal__movie-data__button--bookmarked {
-  background-color: green;
+  background: linear-gradient(to bottom right, #6fcf47, #448f31);
 }
 
 .modal__movie-data__button--trailer {

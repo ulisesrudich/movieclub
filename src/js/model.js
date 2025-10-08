@@ -165,3 +165,18 @@ export const setView = function (view) {
 export const setMaxSlide = function (slidesCount) {
   state.slider.maxSlide = slidesCount;
 };
+
+// Bookmarks
+export const pushToBookmarks = function (movie) {
+  state.bookmarks.push(movie);
+  persistBookmarks();
+};
+
+export const removeFromBookmarks = function () {
+  state.bookmarks.splice(findIndexBookmarked(), 1);
+  persistBookmarks();
+};
+
+export const persistBookmarks = function () {
+  localStorage.setItem('bookmarks', JSON.stringify(state.bookmarks));
+};

@@ -36,7 +36,7 @@ const controlInitHome = function () {
 
   initSlider();
   initMovies();
-  // initIntersectionObserver();
+  initNavbar();
 
   homeView.scrollToTop();
 };
@@ -51,9 +51,19 @@ const initNavbar = function () {
 };
 
 const controlNavDisplay = function (entry) {
-  !entry.isIntersecting
-    ? navView.toggleFixed(true)
-    : navView.toggleFixed(false);
+  if (
+    model.state.currentView === 'results' ||
+    model.state.currentView === 'bookmarks'
+  ) {
+    navView.toggleFixed(false);
+    return;
+  }
+
+  if (model.state.currentView === 'home') {
+    !entry.isIntersecting
+      ? navView.toggleFixed(true)
+      : navView.toggleFixed(false);
+  }
 };
 
 // Slider
@@ -112,8 +122,7 @@ const controlSearch = async function () {
 
     if (!inputValue) return;
 
-    // Setting currentView to 'search results'
-    model.setView('results');
+    // *****************
 
     // Calling API with the search bar user's input (this stores API response in model.state.results)
     await model.getMoviesAndShowsByQuery(inputValue);
@@ -123,6 +132,11 @@ const controlSearch = async function () {
       throw new Error(
         'No results found for your search, please try another one :)'
       );
+
+    // Setting currentView to 'search results'
+    model.setView('results');
+    // Setting navbar postion correctly
+    controlNavDisplay();
 
     // Render results
     searchBookmarksView.render(model.state.results, model.state.currentView);
@@ -143,7 +157,10 @@ const controlRenderBookmarks = function () {
       return;
     }
 
+    // Setting currentView to 'bookmarks'
     model.setView('bookmarks');
+    // Setting navbar postion correctly
+    controlNavDisplay();
 
     searchBookmarksView.render(model.state.bookmarks, model.state.currentView);
     searchBookmarksView.scrollToTop();
@@ -152,10 +169,10 @@ const controlRenderBookmarks = function () {
 
 const controlAddRemoveBookmarks = function () {
   if (model.isBookmarked()) {
-    model.state.bookmarks.splice(model.findIndexBookmarked(), 1);
+    model.removeFromBookmarks();
     modalView.updateBtnBookmarks('removed');
   } else {
-    model.state.bookmarks.push(model.state.currentlyDisplayedInModal);
+    model.pushToBookmarks(model.state.currentlyDisplayedInModal);
     modalView.updateBtnBookmarks('added');
   }
 
@@ -164,13 +181,18 @@ const controlAddRemoveBookmarks = function () {
   }
 };
 
+const controlLoadBookmarks = function () {
+  const bookmarks = localStorage.getItem('bookmarks');
+  if (bookmarks) model.state.bookmarks = JSON.parse(bookmarks);
+};
+
 // Modal
 const controlOpenModal = async function (e, el) {
   try {
     // const clicked = e.currentTarget;
 
     // Storing id & media type
-    const id = el.dataset.movieId; // Trae valor del atributo 'data-movie-id' del HTML
+    const id = el.dataset.movieId;
     const mediaType = el.dataset.mediaType;
 
     // Getting movie/show by id & media type
@@ -198,6 +220,8 @@ const controlOpenModal = async function (e, el) {
 
 const init = async function () {
   try {
+    // localStorage
+    controlLoadBookmarks();
     // Home
     await model.getHomeMoviesAndShows();
     controlInitHome(); // initSlider() + initMovies()
