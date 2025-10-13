@@ -4,11 +4,11 @@ Personal frontend project of a streaming platform inspired by Netflix/HBO Max, b
 
 ## 🔮 Features
 
-- Search any movie/show with the _search bar_
+- Search any movie/show using the _search bar_
 - Hero _slider_ with featured movies
 - Movie recommendations organized by category (horizontal scroll)
 - _Modal_ with detailed movie information displayed when clicking any movie
-- Functionality to add movies to bookmarks, and view all bookmarks (stored in Local Storage)
+- Functionality to add movies to _bookmarks_, and view them between sessions (stored in localStorage)
 
 ## ⚙️ API
 
