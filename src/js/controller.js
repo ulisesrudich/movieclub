@@ -159,7 +159,7 @@ const controlRenderBookmarks = function () {
 
     // Setting currentView to 'bookmarks'
     model.setView('bookmarks');
-    // Setting navbar postion correctly
+    // Setting navbar position correctly
     controlNavDisplay();
 
     searchBookmarksView.render(model.state.bookmarks, model.state.currentView);
@@ -184,6 +184,12 @@ const controlAddRemoveBookmarks = function () {
 const controlLoadBookmarks = function () {
   const bookmarks = localStorage.getItem('bookmarks');
   if (bookmarks) model.state.bookmarks = JSON.parse(bookmarks);
+};
+
+const controlClearAllBookmarks = function () {
+  model.state.bookmarks = [];
+  model.persistBookmarks();
+  searchBookmarksView.render(model.state.bookmarks, model.state.currentView);
 };
 
 // Modal
@@ -230,6 +236,9 @@ const init = async function () {
     // Modal
     modalView.addHandlerOpen(controlOpenModal);
     modalView.addHandlerBtnBookmarks(controlAddRemoveBookmarks);
+    // Bookmarks
+    searchBookmarksView.addHandlerBtnHome(controlInitHome);
+    searchBookmarksView.addHandlerClearAll(controlClearAllBookmarks);
   } catch (err) {
     // Rendering error modal
     errorView._openErrorModal(

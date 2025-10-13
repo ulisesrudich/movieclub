@@ -8,11 +8,12 @@ class SearchBookmarksView extends View {
     this.clear();
     this._data = data;
     this._view = view;
-    const markup = this._generateMarkup();
+    const h2Container = this._generateH2Container();
+    const markup = this._generateMarkup(h2Container);
     this._parentEl.insertAdjacentHTML('afterbegin', markup);
   }
 
-  _generateMarkup() {
+  _generateMarkup(h2) {
     const currentView = String(this._view);
     const markup = this._data
       .map(
@@ -44,18 +45,19 @@ class SearchBookmarksView extends View {
         <div class="button__back-container">
           <button
             class="button__back btn flex center"
-            aria-label="Go back to previous section"
+            aria-label="Go back to home"
           >
             <ion-icon
               name="chevron-back-outline"
               class="icon icon--back"
             ></ion-icon>
-            <p>Back</p>
+            <p>Home</p>
           </button>
         </div>
 
         <!-- h2 -->
-        <h2>${currentView.charAt(0).toUpperCase() + currentView.slice(1)}</h2>
+        ${h2}
+
         <!-- Movie posters container -->
         <ul class="results__posters-container">
 
@@ -65,6 +67,28 @@ class SearchBookmarksView extends View {
         </ul>
       </section>
     `;
+  }
+
+  _generateH2Container() {
+    const currentView = String(this._view);
+    const capitalizeH2 =
+      currentView.charAt(0).toUpperCase() + currentView.slice(1);
+
+    return currentView === 'bookmarks'
+      ? `<div class="h2--container flex"><h2>${capitalizeH2}</h2><button class="btn btn--clear-all" aria-label="Clear all bookmarks">Clear all <ion-icon name="trash-outline" class="icon icon--trash"></ion-icon></button></div>`
+      : `<h2>${capitalizeH2}</h2>`;
+  }
+
+  addHandlerBtnHome(handler) {
+    this._parentEl.addEventListener('click', function (e) {
+      if (e.target.closest('.button__back')) handler();
+    });
+  }
+
+  addHandlerClearAll(handler) {
+    this._parentEl.addEventListener('click', function (e) {
+      if (e.target.closest('.btn--clear-all')) handler();
+    });
   }
 }
 
