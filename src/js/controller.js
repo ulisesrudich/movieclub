@@ -222,6 +222,10 @@ const controlOpenModal = async function (e, el) {
   }
 };
 
+const controlWatchTrailer = async function () {
+  window.open(await model.getMovieOrShowTrailer(), '_blank');
+};
+
 /////////////////////////////////////////////
 
 const init = async function () {
@@ -236,6 +240,7 @@ const init = async function () {
     // Modal
     modalView.addHandlerOpen(controlOpenModal);
     modalView.addHandlerBtnBookmarks(controlAddRemoveBookmarks);
+    modalView.addHandlerWatchTrailer(controlWatchTrailer);
     // Bookmarks
     searchBookmarksView.addHandlerBtnHome(controlInitHome);
     searchBookmarksView.addHandlerClearAll(controlClearAllBookmarks);

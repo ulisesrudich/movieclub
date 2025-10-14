@@ -1,4 +1,5 @@
-import { API_KEY, BASE_API_URL } from './config.js';
+import { API_KEY, BASE_API_URL, BASE_YT_URL } from './config.js';
+import errorView from './views/errorView.js';
 
 export const state = {
   currentView: 'home', // home, search results, bookmarks
@@ -137,6 +138,36 @@ async function fetchCategory(category, quantity, extraParams = '') {
     .map(item => parseAPIPropertyNamesHome(item, category))
     .slice(0, quantity);
 }
+
+// For getting the YouTube link to watch the movie's trailer
+export const getMovieOrShowTrailer = async function () {
+  try {
+    // Getting all videos related to the movie/show
+    const data = await fetch(
+      `${BASE_API_URL}/${state.currentlyDisplayedInModal.mediaType}/${state.currentlyDisplayedInModal.id}/videos?api_key=${API_KEY}&language=en-US`
+    );
+
+    if (!data)
+      throw new Error(
+        'No trailer available for this movie, please try another one :)'
+      );
+
+    const videos = await data.json();
+
+    // Filtering by type = trailer
+    const trailer = videos.results.find(video => video.type === 'Trailer');
+
+    if (!trailer)
+      throw new Error(
+        'No trailer available for this movie, please try another one :)'
+      );
+
+    // Returning YouTube URL
+    return `${BASE_YT_URL}${trailer.key}`;
+  } catch (err) {
+    errorView._openErrorModal(err.message);
+  }
+};
 
 // For checking if a title is bookmarked
 export const isBookmarked = function () {

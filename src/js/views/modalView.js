@@ -6,6 +6,9 @@ class ModalView {
   _closeButton = document.querySelector('.modal__close-icon');
   _bookmarksButton = document.querySelector('.bookmarks');
   _bookmarksIcon = document.querySelector('.bookmarks--icon');
+  _trailerButton = document.querySelector(
+    '.modal__movie-data__button--trailer'
+  );
 
   constructor() {
     this.addHandlerClose();
@@ -141,6 +144,10 @@ class ModalView {
         'modal__movie-data__button--bookmarks'
       );
     }
+  }
+
+  addHandlerWatchTrailer(handler) {
+    this._trailerButton.addEventListener('click', handler);
   }
 }
 
