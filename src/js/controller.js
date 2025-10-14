@@ -25,15 +25,14 @@ const controlHome = function () {
 };
 
 const controlInitHome = function () {
+  // Setting currentView to 'home'
   model.setView('home');
-  homeView.render(model.state.homeMovies);
 
-  // Rendering error modal
-  if (!model.state.homeMovies)
-    errorView._openErrorModal(
-      'Something went wrong when initializing the app, please refresh the page :)'
-    );
+  // Rendering home movies/shows
+  // Antes: homeView.render(model.state.homeMovies); ******************** BORRAR ESTA LÍNEA ***********************
+  homeView.render();
 
+  // Initializing slider, movie rows, navbar
   initSlider();
   initMovies();
   initNavbar();
@@ -108,7 +107,6 @@ const initMovies = function () {
 };
 
 // Search results
-// CREAR MÉTODO CON EVENT LISTENER EN BOTÓN DE 'BACK' EN searchBookmarksView.js, Y USAR EN init(). Se puede poner event listener en un botón que no existe al cargar la página??
 const controlSearch = async function () {
   try {
     // Storing user's input on search bar
@@ -122,19 +120,12 @@ const controlSearch = async function () {
 
     if (!inputValue) return;
 
-    // *****************
-
     // Calling API with the search bar user's input (this stores API response in model.state.results)
     await model.getMoviesAndShowsByQuery(inputValue);
 
-    // Handling error if API doesn't have a response for the query
-    if (model.state.results.length === 0)
-      throw new Error(
-        'No results found for your search, please try another one :)'
-      );
-
     // Setting currentView to 'search results'
     model.setView('results');
+
     // Setting navbar postion correctly
     controlNavDisplay();
 
@@ -159,6 +150,7 @@ const controlRenderBookmarks = function () {
 
     // Setting currentView to 'bookmarks'
     model.setView('bookmarks');
+
     // Setting navbar position correctly
     controlNavDisplay();
 
@@ -204,12 +196,6 @@ const controlOpenModal = async function (e, el) {
     // Getting movie/show by id & media type
     const movieData = await model.getMovieOrShowById(id, mediaType);
 
-    // Handling error
-    if (!movieData)
-      throw new Error(
-        'Could not load information about this title, please try another one :)'
-      );
-
     // Checking what state the bookmarks button should be in
     if (model.isBookmarked()) modalView.updateBtnBookmarks('added');
     if (!model.isBookmarked()) modalView.updateBtnBookmarks('removed');
@@ -217,13 +203,16 @@ const controlOpenModal = async function (e, el) {
     // Showing modal with data about the clicked movie/show
     modalView.openModal(movieData);
   } catch (err) {
-    // Rendering error modal
     errorView._openErrorModal(err.message);
   }
 };
 
 const controlWatchTrailer = async function () {
-  window.open(await model.getMovieOrShowTrailer(), '_blank');
+  try {
+    window.open(await model.getMovieOrShowTrailer(), '_blank');
+  } catch (err) {
+    errorView._openErrorModal(err.message);
+  }
 };
 
 /////////////////////////////////////////////
@@ -245,10 +234,7 @@ const init = async function () {
     searchBookmarksView.addHandlerBtnHome(controlInitHome);
     searchBookmarksView.addHandlerClearAll(controlClearAllBookmarks);
   } catch (err) {
-    // Rendering error modal
-    errorView._openErrorModal(
-      'An error occurred while initializing the app, please refresh the page :)'
-    );
+    errorView._openErrorModal(err.message);
   }
 };
 init();

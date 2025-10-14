@@ -85,6 +85,9 @@
     --max-width-search-bar: 40rem;
     --padding-search-bar: 2rem 3rem;
 
+    /* Modal section */
+    --line-clamp-modal-overview: 11;
+
     /* Footer section */
     --mg-top-footer-line: 8.8rem;
   }

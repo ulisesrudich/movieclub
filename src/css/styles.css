@@ -98,6 +98,8 @@
   --height-modal-close-icon--div: 5rem;
   --padding-right-modal-close-icon: 0.4rem;
 
+  --line-clamp-modal-overview: 8;
+
   /* Search results / bookmarks section */
   --gap-results-rows: 2.4rem;
   --gap-results-button-back-and-h2: 4.8rem;
@@ -166,6 +168,26 @@ li {
 .center {
   justify-content: center;
   align-items: center;
+}
+
+/* To avoid having titles exceeding 2 lines in the modal */
+.truncate-2-lines {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* To avoid having very large overviews in the modal */
+.truncate-modal-overview {
+  display: -webkit-box;
+  -webkit-line-clamp: var(--line-clamp-modal-overview);
+  line-clamp: var(--line-clamp-modal-overview);
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Buttons */
@@ -328,6 +350,11 @@ li {
   color: var(--color-black);
 }
 
+.search__field:focus {
+  outline: 2px solid var(--color-grey);
+  outline-offset: 0.3rem;
+}
+
 input::placeholder {
   font-family: 'Inter', sans-serif;
   letter-spacing: var(--letter-spacing-search-bar);
@@ -380,8 +407,8 @@ input::placeholder {
 
 .slider {
   max-width: 100%;
-  /* max-height: var(--max-height-slider); */
   height: var(--max-height-slider);
+  min-height: 50rem;
   overflow: hidden;
 
   position: relative;
@@ -528,6 +555,7 @@ section.movies:last-of-type {
   position: relative;
   width: var(--width-modal);
   height: var(--height-modal);
+  min-height: 60rem;
   background: var(--gradient-background);
   padding: var(--padding-modal);
   border-radius: var(--border-radius-sm);

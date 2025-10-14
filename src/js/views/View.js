@@ -5,7 +5,7 @@ export default class View {
     this._parentEl.innerHTML = '';
   }
 
-  render(data) {
+  render(data = []) {
     this.clear();
     this._data = data;
     const markup = this._generateMarkup();

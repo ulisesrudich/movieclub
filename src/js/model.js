@@ -1,5 +1,4 @@
 import { API_KEY, BASE_API_URL, BASE_YT_URL } from './config.js';
-import errorView from './views/errorView.js';
 
 export const state = {
   currentView: 'home', // home, search results, bookmarks
@@ -54,48 +53,63 @@ export const parseAPIPropertyNamesHome = function (obj, category) {
 
 // For fetching data of the corresponding movie/show clicked
 export const getMovieOrShowById = async function (id, mediaType) {
-  const res = await fetch(
-    `${BASE_API_URL}/${mediaType}/${id}?api_key=${API_KEY}&language=en-US&append_to_response=credits`
-  );
+  try {
+    const res = await fetch(
+      `${BASE_API_URL}/${mediaType}/${id}?api_key=${API_KEY}&language=en-US&append_to_response=credits`
+    );
+    const data = await res.json();
 
-  if (!res.ok)
-    throw new Error(
-      `Could not fetch data for that title, please try another one :)`
+    if (data.success && data.success === false)
+      throw new Error(
+        `Could not fetch data for this title, please try another one :)`
+      );
+
+    // Updating currently displayed movie/show
+    state.currentlyDisplayedInModal = '';
+    state.currentlyDisplayedInModal = parseAPIPropertyNamesModal(
+      data,
+      mediaType
     );
 
-  const data = await res.json();
-
-  // Updating currently displayed movie/show
-  state.currentlyDisplayedInModal = '';
-  state.currentlyDisplayedInModal = parseAPIPropertyNamesModal(data, mediaType); // Podría usar parseAPIPropertyNamesHome()
-
-  return parseAPIPropertyNamesModal(data, mediaType);
+    return parseAPIPropertyNamesModal(data, mediaType);
+  } catch (err) {
+    throw err;
+  }
 };
 
 // For showing search results (search bar)
 export const getMoviesAndShowsByQuery = async function (query) {
-  const res = await fetch(
-    `${BASE_API_URL}/search/multi?api_key=${API_KEY}&query=${query}&language=en-US`
-  );
-  const data = await res.json();
+  try {
+    const res = await fetch(
+      `${BASE_API_URL}/search/multi?api_key=${API_KEY}&query=${query}&language=en-US`
+    );
+    const data = await res.json();
 
-  // Filtering out actors. Filtering out movies that don't have a poster to display. Limiting to 12 results after the filtering
-  const dataFiltered = data.results
-    .filter(
-      item =>
-        (item.media_type === 'movie' || item.media_type === 'tv') &&
-        item.poster_path &&
-        item.poster_path !== ''
-    )
-    .slice(0, 12);
+    if (data.total_results === 0)
+      throw new Error(
+        'No results found for your search, please try another one :)'
+      );
 
-  // Parsing property names
-  const dataParsed = dataFiltered.map(item =>
-    parseAPIPropertyNamesHome(item, '')
-  );
+    // Filtering out actors. Filtering out movies that don't have a poster to display. Limiting to 12 results after the filtering
+    const dataFiltered = data.results
+      .filter(
+        item =>
+          (item.media_type === 'movie' || item.media_type === 'tv') &&
+          item.poster_path &&
+          item.poster_path !== ''
+      )
+      .slice(0, 12);
 
-  // Storing results in model.state.results
-  state.results = dataParsed;
+    // Parsing property names
+    const dataParsed = dataFiltered.map(item =>
+      parseAPIPropertyNamesHome(item, '')
+    );
+
+    // Storing results in model.state.results
+    state.results = dataParsed;
+  } catch (err) {
+    throw err;
+  }
 };
 
 // For fetching movies/series shown at the home screen (initial fetch)
@@ -117,26 +131,29 @@ export const getHomeMoviesAndShows = async function () {
 
     state.homeMovies = [...trending, ...popular, ...topRated];
   } catch (err) {
-    console.error('Error getHomeMoviesAndShows() in model.js', err);
     throw err;
   }
 };
 
 // For fetching titles for each category (posters row) at the home screen
 async function fetchCategory(category, quantity, extraParams = '') {
-  const res = await fetch(
-    `${BASE_API_URL}/${category}?api_key=${API_KEY}&language=en-US${extraParams}`
-  );
-
-  if (!res.ok)
-    throw new Error(
-      'Could not load movies for this category, please refresh the page :)'
+  try {
+    const res = await fetch(
+      `${BASE_API_URL}/${category}?api_key=${API_KEY}&language=en-US${extraParams}`
     );
+    const data = await res.json();
 
-  const data = await res.json();
-  return (data.results ?? [])
-    .map(item => parseAPIPropertyNamesHome(item, category))
-    .slice(0, quantity);
+    if (data.success && data.success === false)
+      throw new Error(
+        'Could not load movies correctly, please refresh the page :)'
+      );
+
+    return (data.results ?? [])
+      .map(item => parseAPIPropertyNamesHome(item, category))
+      .slice(0, quantity);
+  } catch (err) {
+    throw err;
+  }
 }
 
 // For getting the YouTube link to watch the movie's trailer
@@ -146,26 +163,25 @@ export const getMovieOrShowTrailer = async function () {
     const data = await fetch(
       `${BASE_API_URL}/${state.currentlyDisplayedInModal.mediaType}/${state.currentlyDisplayedInModal.id}/videos?api_key=${API_KEY}&language=en-US`
     );
-
-    if (!data)
-      throw new Error(
-        'No trailer available for this movie, please try another one :)'
-      );
-
     const videos = await data.json();
+
+    if (videos.results.length === 0)
+      throw new Error(
+        'No trailer available for this title, please try with another one :)'
+      );
 
     // Filtering by type = trailer
     const trailer = videos.results.find(video => video.type === 'Trailer');
 
     if (!trailer)
       throw new Error(
-        'No trailer available for this movie, please try another one :)'
+        'No trailer available for this title, please try with another one :)'
       );
 
     // Returning YouTube URL
     return `${BASE_YT_URL}${trailer.key}`;
   } catch (err) {
-    errorView._openErrorModal(err.message);
+    throw err;
   }
 };
 
