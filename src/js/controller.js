@@ -68,36 +68,70 @@ const controlNavDisplay = function (entry) {
 // Slider
 const initSlider = function () {
   sliderView._initParent();
-  sliderView.render(model.state.homeMovies.slice(0, 3));
+  sliderView.render();
   sliderView.initElements();
   model.setMaxSlide(sliderView.getSlidesCount());
   sliderView.initialDotsRender(model.state.slider.maxSlide);
+  model.state.slider.currentSlide = 0;
   sliderView.slidesMove(0);
   sliderView.addHandlerPrevious(controlPreviousSlide);
   sliderView.addHandlerNext(controlNextSlide);
+  stopAutoSlide();
+  startAutoSlide();
   sliderView.addHandlerDots(controlGoToSlide);
 };
 
 const controlPreviousSlide = function () {
+  // Stop timer
+  stopAutoSlide();
+
+  // Move slide
   model.state.slider.currentSlide === 0
     ? (model.state.slider.currentSlide = model.state.slider.maxSlide)
     : model.state.slider.currentSlide--;
 
   sliderView.slidesMove(model.state.slider.currentSlide);
+
+  // Start timer again
+  startAutoSlide();
 };
 
 const controlNextSlide = function () {
+  // Stop timer
+  stopAutoSlide();
+
+  // Move slide
   model.state.slider.currentSlide === model.state.slider.maxSlide
     ? (model.state.slider.currentSlide = 0)
     : model.state.slider.currentSlide++;
 
   sliderView.slidesMove(model.state.slider.currentSlide);
+
+  // Start timer again
+  startAutoSlide();
 };
 
 const controlGoToSlide = function (slide) {
+  // Stop timer
+  stopAutoSlide();
+
+  // Moving slides
   model.state.slider.currentSlide = slide;
   sliderView.slidesMove(slide);
+
+  // Start timer again
+  startAutoSlide();
 };
+
+// Auto-slide
+let autoSlideTimer;
+const startAutoSlide = function () {
+  autoSlideTimer = setInterval(() => {
+    controlNextSlide();
+  }, 4000);
+};
+
+const stopAutoSlide = () => clearInterval(autoSlideTimer);
 
 // Movies
 const initMovies = function () {

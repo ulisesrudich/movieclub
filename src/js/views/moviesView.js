@@ -81,10 +81,10 @@ class MoviesView extends View {
         </section>
 
         <!-- Row 2 -->
-        <section class="movies flex" aria-label="Upcoming">
+        <section class="movies flex" aria-label="Comedy">
           <div class="container">
             <!-- Genre name -->
-            <h2>Upcoming</h2>
+            <h2>Comedy</h2>
           </div>
           <!-- Row container -->
           <div class="movies__row-wrapper">

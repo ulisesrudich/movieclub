@@ -1,4 +1,5 @@
-import { API_KEY, BASE_API_URL, BASE_YT_URL } from './config.js';
+import { BASE_API_URL, BASE_YT_URL } from './config.js';
+const API_KEY = process.env.API_KEY;
 
 export const state = {
   currentView: 'home', // home, search results, bookmarks
@@ -20,7 +21,6 @@ export const parseAPIPropertyNamesModal = function (obj, mediaType) {
     mediaType: mediaType,
     title: obj.title || obj.name,
     posterPath: obj.poster_path,
-    bigPosterPath: obj.backdrop_path, // Eliminar
     releaseYear: (obj.release_date || obj.first_air_date || '').slice(0, 4),
     overview: obj.overview || 'No overview available',
     // Parsear para que marque duración con formato => 2h 22m (ahora está en formato 88m):
@@ -43,11 +43,9 @@ export const parseAPIPropertyNamesModal = function (obj, mediaType) {
 export const parseAPIPropertyNamesHome = function (obj, category) {
   return {
     id: obj.id,
-    mediaType:
-      obj.media_type || (category?.startsWith('movie') ? 'movie' : 'tv'),
+    mediaType: obj.media_type || (category?.includes('movie') ? 'movie' : 'tv'),
     title: obj.title || obj.name,
     posterPath: obj.poster_path,
-    bigPosterPath: obj.backdrop_path, // Eliminar
   };
 };
 
@@ -116,16 +114,12 @@ export const getMoviesAndShowsByQuery = async function (query) {
 export const getHomeMoviesAndShows = async function () {
   try {
     const [trending, popular, topRated] = await Promise.all([
-      fetchCategory(
-        'trending/all/day',
-        16,
-        '&without_genres=10762&without_original_language=ja'
-      ),
-      fetchCategory('movie/upcoming', 16, '&without_original_language=ja'),
+      fetchCategory('trending/all/day', 16, '&without_genres=10762'),
+      fetchCategory('discover/movie', 16, '&with_genres=35&without_genres=27'),
       fetchCategory(
         'discover/tv',
         16,
-        '&sort_by=popularity.desc&without_genres=16,10762&without_original_language=ja'
+        '&sort_by=popularity.desc&without_genres=16,10762'
       ),
     ]);
 
@@ -148,7 +142,17 @@ async function fetchCategory(category, quantity, extraParams = '') {
         'Could not load movies correctly, please refresh the page :)'
       );
 
-    return (data.results ?? [])
+    // Filtering out movies/shows with language in japanese, chinese, hindi and thai
+    const dataFiltered = data.results.filter(
+      item =>
+        item.original_language !== 'ja' &&
+        item.original_language !== 'zh' &&
+        item.original_language !== 'hi' &&
+        item.original_language !== 'te' &&
+        item.original_language !== 'th'
+    );
+
+    return (dataFiltered ?? [])
       .map(item => parseAPIPropertyNamesHome(item, category))
       .slice(0, quantity);
   } catch (err) {
