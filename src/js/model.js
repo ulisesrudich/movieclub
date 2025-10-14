@@ -23,7 +23,6 @@ export const parseAPIPropertyNamesModal = function (obj, mediaType) {
     posterPath: obj.poster_path,
     releaseYear: (obj.release_date || obj.first_air_date || '').slice(0, 4),
     overview: obj.overview || 'No overview available',
-    // Parsear para que marque duración con formato => 2h 22m (ahora está en formato 88m):
     duration: obj.runtime
       ? `${Math.floor(obj.runtime / 60)}h ${obj.runtime % 60}m`
       : '1h 30m',

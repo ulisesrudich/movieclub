@@ -1,10 +1,4 @@
 node_modules
 dist
 .parcel-cache
-src/index-forkify.html
-src/controller-forkify.js
-src/model-forkify.js
-src/searchView-forkify.js
-src/View-forkify.js
-app-container-sections.html
 .env

@@ -29,7 +29,6 @@ const controlInitHome = function () {
   model.setView('home');
 
   // Rendering home movies/shows
-  // Antes: homeView.render(model.state.homeMovies); ******************** BORRAR ESTA LÍNEA ***********************
   homeView.render();
 
   // Initializing slider, movie rows, navbar
@@ -221,8 +220,6 @@ const controlClearAllBookmarks = function () {
 // Modal
 const controlOpenModal = async function (e, el) {
   try {
-    // const clicked = e.currentTarget;
-
     // Storing id & media type
     const id = el.dataset.movieId;
     const mediaType = el.dataset.mediaType;
