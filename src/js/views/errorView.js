@@ -14,6 +14,13 @@ class ErrorView extends View {
     // Fill modal with error message
     this._fillErrorMessage(errMessage);
 
+    // Show modal
+    this._errorModal.classList.remove('hidden');
+
+    // If movie modal is displayed, then the page scroll is already blocked and padding-right is being applied to the body
+    if (!document.querySelector('.overlay').classList.contains('hidden'))
+      return;
+
     // Calc scroll bar width
     const scrollBarWidth =
       window.innerWidth - document.documentElement.clientWidth;
@@ -29,14 +36,15 @@ class ErrorView extends View {
         '.nav__content'
       ).style.paddingRight = `${scrollBarWidth}px`;
     }
-
-    // Show modal
-    this._errorModal.classList.remove('hidden');
   }
 
   _closeErrorModal() {
     // Hide modal
     this._errorModal.classList.add('hidden');
+
+    // If movie modal is displayed I don't want to bring back the scroll to the page when closing error modal
+    if (!document.querySelector('.overlay').classList.contains('hidden'))
+      return;
 
     // Unblocking page scroll when the modal hides
     document.body.classList.remove('modal-open');

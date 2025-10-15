@@ -104,7 +104,11 @@ class ModalView {
       if (e.target === this._modal) this.closeModal();
     });
     document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && !this._modal.classList.contains('hidden'))
+      if (
+        e.key === 'Escape' &&
+        !this._modal.classList.contains('hidden') &&
+        document.querySelector('.error__overlay').classList.contains('hidden')
+      )
         this.closeModal();
     });
   }

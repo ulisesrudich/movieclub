@@ -295,6 +295,11 @@ li {
   border: 0;
 }
 
+/* Used at .app-container to avoid layout shifts when API is loading home movies */
+.invisible-box {
+  height: 200vh;
+}
+
 /* ---------------------- */
 /*        SECTIONS        */
 /* ---------------------- */
