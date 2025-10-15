@@ -2,6 +2,10 @@
 
 Personal frontend project of a streaming platform inspired by Netflix/HBO Max, built to practice **HTML**, **CSS**, and **JavaScript**.
 
+## 🔴 Live Demo
+
+https://movieclub-ur.netlify.app/
+
 ## 🔮 Features
 
 - Search any movie/show using the _search bar_.
