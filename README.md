@@ -21,3 +21,9 @@ All images and information about the movies displayed in this project come from 
 ## 📱 Responsive
 
 Designed with a responsive approach to work across **all devices**.
+
+## 📬 Contact
+
+**Ulises Rudich**  
+✉️ ulises.r@hotmail.com  
+💼 https://www.linkedin.com/in/ulisesrudich/  
